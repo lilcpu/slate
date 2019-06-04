@@ -1,0 +1,12 @@
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.3.0/gems/fast_blank-1.0.0/ext/fast_blank
+/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby -r ./siteconf20190604-62157-1mdn0si.rb extconf.rb
+creating Makefile
+
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.3.0/gems/fast_blank-1.0.0/ext/fast_blank
+make "DESTDIR=" clean
+
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.3.0/gems/fast_blank-1.0.0/ext/fast_blank
+make "DESTDIR="
+make: *** No rule to make target `/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/include/ruby-2.3.0/universal-darwin18/ruby/config.h', needed by `fast_blank.o'.  Stop.
+
+make failed, exit code 2

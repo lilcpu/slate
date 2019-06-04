@@ -1,0 +1,15 @@
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.6.0/gems/fast_blank-1.0.0/ext/fast_blank
+/usr/local/opt/ruby/bin/ruby -I /usr/local/Cellar/ruby/2.6.3/lib/ruby/2.6.0 -r ./siteconf20190604-65479-h64zbh.rb extconf.rb
+creating Makefile
+
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.6.0/gems/fast_blank-1.0.0/ext/fast_blank
+make "DESTDIR=" clean
+
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.6.0/gems/fast_blank-1.0.0/ext/fast_blank
+make "DESTDIR="
+compiling fast_blank.c
+linking shared-object fast_blank.bundle
+
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.6.0/gems/fast_blank-1.0.0/ext/fast_blank
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 fast_blank.bundle ./.gem.20190604-65479-8g6k31

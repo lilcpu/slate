@@ -1,0 +1,12 @@
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.3.0/gems/redcarpet-3.4.0/ext/redcarpet
+/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby -r ./siteconf20190604-62157-1bho21k.rb extconf.rb
+creating Makefile
+
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.3.0/gems/redcarpet-3.4.0/ext/redcarpet
+make "DESTDIR=" clean
+
+current directory: /Users/lilcpu/dev/mariner/slate/vendor/ruby/2.3.0/gems/redcarpet-3.4.0/ext/redcarpet
+make "DESTDIR="
+make: *** No rule to make target `/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/include/ruby-2.3.0/universal-darwin18/ruby/config.h', needed by `autolink.o'.  Stop.
+
+make failed, exit code 2
