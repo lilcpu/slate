@@ -228,16 +228,16 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#memberships" class="toc-h1 toc-link" data-title="Memberships">Memberships</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#get-all-memberships-in-the-lifespan-directory" class="toc-h2 toc-link" data-title="Get All Memberships in the Lifespan Directory">Get All Memberships in the Lifespan Directory</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#get-a-specific-membership" class="toc-h2 toc-link" data-title="Get a Specific Membership">Get a Specific Membership</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#get-all-categories" class="toc-h2 toc-link" data-title="Get All Categories">Get All Categories</a>
                   </li>
               </ul>
           </li>
@@ -254,7 +254,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Lifespan API! You can use our API to access Lifespan API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
 
 <p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
@@ -289,7 +289,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='memberships'>Memberships</h1><h2 id='get-all-memberships-in-the-lifespan-directory'>Get All Memberships in the Lifespan Directory</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
@@ -297,7 +297,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.lifespan.co/memberships"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
 
@@ -307,26 +307,81 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="s2">"memberships"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">  
+   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Aaptiv"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"motto"</span><span class="p">:</span><span class="s2">"Workout with an audio-based personal trainer"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Aaptiv has popularized the audio-based workout. Expert trainers are in your ear guiding you as you exercise, providing techniques, tips, and encouragement. You’ll also hear fresh music hits and classic tracks paced to your workout. It can help you add structure to your gym sessions and make them more productive than ever."</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"https://aaptiv.com/"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"service_medium"</span><span class="p">:</span><span class="s2">"digital"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"offers_trial"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"info"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">""</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"how_it_works"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">"Enter your goals to find personalized programs and workouts"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Choose a workout based on duration, trainer, music, and more"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Put on your headphones and Aaptiv's trainers will guide your workout"</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"brand_color_code"</span><span class="p">:</span><span class="s2">"#0019FF"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"regions"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"plans"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Monthly"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">14.99</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
+            </span><span class="s2">"No free trial option"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Automatically renews every month"</span><span class="w">
+         </span><span class="p">],</span><span class="w">
+         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"month"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">99.99</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
+            </span><span class="s2">"Includes a free 7-day trial"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"45% savings compared to monthly"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Automatically renews every year"</span><span class="w">
+         </span><span class="p">],</span><span class="w">
+         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"annual"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"offers"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"free"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"duration"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"for_plan"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"7 days free"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Fitness"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Fitness"</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="err">...</span><span class="w">
   </span><span class="p">}</span><span class="w">
+  </span><span class="err">....</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves all memberships.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>GET http://api.lifespan.co/memberhsips</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -336,21 +391,36 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>service_medium</td>
+<td>na</td>
+<td>Either &#39;pyshical&#39; or &#39;digital&#39; returns memberships of said medium</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>offers_trial</td>
+<td>na</td>
+<td>Either true or false. If true, filters memberships with a trial offer</td>
+</tr>
+<tr>
+<td>region</td>
+<td>na</td>
+<td>Ex: &#39;United States&#39;</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>false</td>
+<td>If true the memberships will be sent with only id, motto, description and name</td>
+</tr>
+<tr>
+<td>categories</td>
+<td>all</td>
+<td>If a selection of categories is given, results will be filtered accordingly. Comma seperated.</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Don't forget your authentication key
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='get-a-specific-membership'>Get a Specific Membership</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -358,7 +428,7 @@ Remember — a happy kitten is an authenticated kitten!
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.lifespan.co/memberships/1"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
 
@@ -368,19 +438,76 @@ Remember — a happy kitten is an authenticated kitten!
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">  
+   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Aaptiv"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"motto"</span><span class="p">:</span><span class="s2">"Workout with an audio-based personal trainer"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Aaptiv has popularized the audio-based workout. Expert trainers are in your ear guiding you as you exercise, providing techniques, tips, and encouragement. You’ll also hear fresh music hits and classic tracks paced to your workout. It can help you add structure to your gym sessions and make them more productive than ever."</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"https://aaptiv.com/"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"service_medium"</span><span class="p">:</span><span class="s2">"digital"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"offers_trial"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"info"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">""</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"how_it_works"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">"Enter your goals to find personalized programs and workouts"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Choose a workout based on duration, trainer, music, and more"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Put on your headphones and Aaptiv's trainers will guide your workout"</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"brand_color_code"</span><span class="p">:</span><span class="s2">"#0019FF"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"regions"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"plans"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Monthly"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">14.99</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
+            </span><span class="s2">"No free trial option"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Automatically renews every month"</span><span class="w">
+         </span><span class="p">],</span><span class="w">
+         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"month"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">99.99</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
+            </span><span class="s2">"Includes a free 7-day trial"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"45% savings compared to monthly"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Automatically renews every year"</span><span class="w">
+         </span><span class="p">],</span><span class="w">
+         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"annual"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"offers"</span><span class="p">:[</span><span class="w">  
+      </span><span class="p">{</span><span class="w">  
+         </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"free"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"duration"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"for_plan"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"7 days free"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Fitness"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Fitness"</span><span class="w">
+   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>This endpoint retrieves a specific membership.</p>
 
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>GET http://api.lifespan.co/memberships/&lt;Name&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -389,11 +516,11 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>Name</td>
+<td>The Name of the membership to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='get-all-categories'>Get All Categories</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -401,8 +528,7 @@ Remember — a happy kitten is an authenticated kitten!
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 <span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://api.lifespan.co/categories"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
 
@@ -413,25 +539,22 @@ Remember — a happy kitten is an authenticated kitten!
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+  </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Fitness"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Beauty"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
+<p>This endpoint retrieves a list of all categories.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
+<p><code>GET http://api.lifespan.co/categories</code></p>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
