@@ -16,7 +16,7 @@ search: true
 
 # Introduction
 
-Welcome to the Lifespan API! You can use our API to access Lifespan API endpoints, which can get information on various subscription services, categories, and tools to analyze transaction statements to identify or reccomend services to your users.
+Welcome to the Lifespan API! You can use our API to access Lifespan API endpoints, which can get information on various subscription services, categories, and tools to analyze transaction statements to identify or recommend services to your users.
 
 # Authentication
 
@@ -119,13 +119,13 @@ This endpoint retrieves all memberships.
 
 ### HTTP Request
 
-`GET https://api.lifespan.co/memberhsips`
+`GET https://api.lifespan.co/memberships`
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-service_medium | na | Either 'pyshical' or 'digital' returns memberships of said medium
+service_medium | na | Either 'physical' or 'digital' returns memberships of said medium
 offers_trial | na | Either true or false. If true, filters memberships with a trial offer
 region | na | Ex: 'United States'
 summary | false | If true the memberships will be sent with only id, motto, description and name
