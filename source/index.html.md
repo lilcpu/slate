@@ -284,7 +284,7 @@ curl -d '{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}'
 }
 ```
 
-This endpoint takes in a merchant name and the email of the user that would like to cancel thier subscription. This email __must__ be the email in use at the service in question. The cancellation will be initiated and that user will recieve email updates on the cencellation status as it progresses. Usually no more than 24 hours.
+This endpoint takes in a merchant name and the email of the user that would like to cancel their subscription. This email __must__ be the email in use at the service in question. The cancellation will be initiated and that user will recieve email updates on the cencellation status as it progresses. Usually no more than 24 hours.
 
 ### HTTP Request
 
@@ -295,7 +295,7 @@ This endpoint takes in a merchant name and the email of the user that would like
 Parameter | Description
 --------- | -----------
 merchantName | the name of the merchant you wish to cancel a subscription with
-userEmail | the email of the user who is cancelling thier subscription (__must__ be the email on the account being cancelled with the merchant)
+userEmail | the email of the user who is cancelling their subscription (__must__ be the email on the account being cancelled with the merchant)
 
 <aside class="success">
 Don't forget your authentication key
