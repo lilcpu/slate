@@ -3,12 +3,9 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='#'>Request a Developer Key</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -19,80 +16,27 @@ search: true
 
 # Introduction
 
-Welcome to the Lifespan API! You can use our API to access Lifespan API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Welcome to the Lifespan API! You can use our API to access Lifespan API endpoints, which can get information on various subscription services, categories, and tools to analyze transaction statements to identify or reccomend services to your users.
 
 # Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
 
 ```shell
 # With shell, you can just pass the correct header with each request
 curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: {token}"
 ```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>token</code> with your personal API key.
 </aside>
 
 # Memberships
 
 ## Get All Memberships in the Lifespan Directory
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
 ```shell
-curl "http://api.lifespan.co/memberships"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+curl "https://api.lifespan.co/memberships"
+  -H "Authorization: {token}"
 ```
 
 > The above command returns JSON structured like this:
@@ -175,7 +119,7 @@ This endpoint retrieves all memberships.
 
 ### HTTP Request
 
-`GET http://api.lifespan.co/memberhsips`
+`GET https://api.lifespan.co/memberhsips`
 
 ### Query Parameters
 
@@ -193,30 +137,9 @@ Don't forget your authentication key
 
 ## Get a Specific Membership
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
 ```shell
-curl "http://api.lifespan.co/memberships/1"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+curl "https://api.lifespan.co/memberships/1"
+  -H "Authorization: {token}"
 ```
 
 > The above command returns JSON structured like this:
@@ -290,11 +213,9 @@ let max = api.kittens.get(2);
 
 This endpoint retrieves a specific membership.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
 ### HTTP Request
 
-`GET http://api.lifespan.co/memberships/<Name>`
+`GET https://api.lifespan.co/memberships/<Name>`
 
 ### URL Parameters
 
@@ -302,32 +223,16 @@ Parameter | Description
 --------- | -----------
 Name | The Name of the membership to retrieve
 
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
+
 ## Get All Categories
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
 ```shell
-curl "http://api.lifespan.co/categories"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+curl "https://api.lifespan.co/categories"
+  -H "Authorization: {token}"
 ```
 
 > The above command returns JSON structured like this:
@@ -352,5 +257,120 @@ This endpoint retrieves a list of all categories.
 
 ### HTTP Request
 
-`GET http://api.lifespan.co/categories`
+`GET https://api.lifespan.co/categories`
 
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
+
+# Cancellation
+
+## Cancel a Subscription
+
+```shell
+curl -d '{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}' 
+    -H "Content-Type: application/json"
+    -H "Authorization: {token}" 
+    -X POST https://api.lifespan.co/cancellations
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "initiated",
+  "id": 1234
+}
+```
+
+This endpoint takes in a merchant name and the email of the user that would like to cancel thier subscription. This email __must__ be the email in use at the service in question. The cancellation will be initiated and that user will recieve email updates on the cencellation status as it progresses. Usually no more than 24 hours.
+
+### HTTP Request
+
+`POST https://api.lifespan.co/cancellations`
+
+### Payload
+
+Parameter | Description
+--------- | -----------
+merchantName | the name of the merchant you wish to cancel a subscription with
+userEmail | the email of the user who is cancelling thier subscription (__must__ be the email on the account being cancelled with the merchant)
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
+## Get the Details of a Specific Cancellation
+
+```shell
+curl "https://api.lifespan.co/cancellations/1234"
+  -H "Authorization: {token}"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "completed",
+  "id": 1234
+}
+```
+
+This endpoint returns the status of a given cancellation id.
+
+### HTTP Request
+
+`GET https://api.lifespan.co/cancellations/<id>`
+
+### Payload
+
+Parameter | Description
+--------- | -----------
+id | the id of the cancellation. This is included in the response to a request to `/cancellations`.
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
+# Recurring Services
+
+## Get All Recurring Services in a Transaction History
+
+```shell
+curl -d '{"transactions":"<transactionHistoryJSONString>"}' 
+    -H "Content-Type: application/json"
+    -H "Authorization: {token}" 
+    -X POST https://api.lifespan.co/services
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "services" : {
+    "RgyPLBjx0qiJ1y5zB0gkc8P3qgE5dPIymdrYB" : [
+      {
+        "name": "Spotify",
+        "price": 1299
+      }
+    ]
+  }
+}
+```
+
+This endpoint returns a list of all recurring services found in a given transaction history. They are organized by accountId which is a plaid construct to securley mask sensitive details of an account. The `price` field of the returned services is always in cents.
+
+### HTTP Request
+
+`POST https://api.lifespan.co/services`
+
+### Payload
+
+Parameter | Description
+--------- | -----------
+transactions | a json string containing an array of transactions from plaid. See the [plaid docs](https://plaid.com/docs/#transactions) for info on obtaining transactions.
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
