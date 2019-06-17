@@ -140,7 +140,7 @@ This endpoint returns the status of a given cancellation id.
 
 Parameter | Description
 --------- | -----------
-id <span style="color:#8792a2; font-size:12px;">number</span> | The ID of the cancellation. This is provided in the response to a POST request to <span style="color:#cd3d64;">`/cancellations`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+id <span style="color:#8792a2; font-size:12px;">integer</span> | The ID of the cancellation. This is provided in the response to a POST request to <span style="color:#cd3d64;">`/cancellations`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -208,8 +208,8 @@ Parameter | Description
 --------- | -----------
 subscriptions <span style="color:#8792a2; font-size:12px;">array</span> | List of user's current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
-age <span style="color:#8792a2; font-size:12px;">number</span> | User's age in years. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
-zip <span style="color:#8792a2; font-size:12px;">number</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+age <span style="color:#8792a2; font-size:12px;">integer</span> | User's age in years. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+zip <span style="color:#8792a2; font-size:12px;">integer</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
 
 <aside class="success">
 Don't forget your authentication key
