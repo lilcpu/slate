@@ -264,10 +264,13 @@ curl -X POST https://api.lifespan.co/merchants
 > The above command returns JSON structured like this:
 
 ```json
-
+   {
+      "status": 200,
+      "description": "SKU successfully uploaded"
+   }
 ```
 
-This endpoint takes in attributes of a subscription service. It returns a SKU object if the call succeeded.
+This endpoint takes in attributes of a subscription service. It returns an object with a 200 status code if the call succeeded.
 
 ### HTTP Request
 
