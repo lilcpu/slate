@@ -33,6 +33,8 @@ curl "api_endpoint_here"
 You must replace <code>token</code> with your personal API key.
 </aside>
 
+# Financial Wellness
+
 # Recurring Payments
 
 ## Get All Recurring Payments in a Transaction History
@@ -145,6 +147,8 @@ id <span style="color:#8792a2; font-size:12px;">integer</span> | The ID of the c
 <aside class="success">
 Don't forget your authentication key
 </aside>
+
+# Commerce
 
 # Recommendations
 
