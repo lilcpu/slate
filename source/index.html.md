@@ -69,7 +69,7 @@ This endpoint returns a list of all recurring payments found in a given transact
 
 Parameter | Description
 --------- | -----------
-transactions <span style="color:#8792a2; font-size:12px;">string</span> | A JSON string containing an array of transactions. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -195,9 +195,9 @@ This endpoint takes in a user's gender, age, zip code, and current subscriptions
 
 Parameter | Description
 --------- | -----------
-gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-age <span style="color:#8792a2; font-size:12px;">number</span> | User's age in years. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-zip <span style="color:#8792a2; font-size:12px;">number</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+age <span style="color:#8792a2; font-size:12px;">number</span> | User's age in years. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+zip <span style="color:#8792a2; font-size:12px;">number</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
 subscriptions <span style="color:#8792a2; font-size:12px;">array</span> | List of user's current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
