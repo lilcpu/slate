@@ -83,7 +83,7 @@ This endpoint returns a list of all recurring payments found in a given transact
 
 Parameter | Description
 --------- | -----------
-transactions <span style="color:#8792a2; font-size:12px;">string</span> | A JSON string containing an array of transactions. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -154,7 +154,7 @@ This endpoint returns the status of a given cancellation id.
 
 Parameter | Description
 --------- | -----------
-id <span style="color:#8792a2; font-size:12px;">number</span> | The ID of the cancellation. This is provided in the response to a POST request to <span style="color:#cd3d64;">`/cancellations`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+id <span style="color:#8792a2; font-size:12px;">integer</span> | The ID of the cancellation. This is provided in the response to a POST request to <span style="color:#cd3d64;">`/cancellations`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -167,10 +167,21 @@ Don't forget your authentication key
 ## Get Recommended Services for a User
 
 ```shell
-curl -d '{"gender": "Female", "age": 30, "zip": 94539, "subscriptions": ["Hulu", "Amazon Prime", "Ipsy", "Lola", "Barkbox"]}' 
+curl -X GET https://api.lifespan.co/recommendations
+    -H "Authorization: {token}"
     -H "Content-Type: application/json"
-    -H "Authorization: {token}" 
-    -X GET https://api.lifespan.co/recommendations
+    -d '{
+         "subscriptions": [
+            "Hulu",
+            "Amazon Prime",
+            "Ipsy",
+            "Lola",
+            "Barkbox"
+         ],
+         "gender": "Female",
+         "age": 30,
+         "zip": 94539
+       }' 
 ```
 
 > The above command returns JSON structured like this:
@@ -201,7 +212,7 @@ curl -d '{"gender": "Female", "age": 30, "zip": 94539, "subscriptions": ["Hulu",
 }
 ```
 
-This endpoint takes in a user's gender, age, zip code, and current subscriptions. The response is an array of objects consisting of the name of each recommended service and its corresponding offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.
+This endpoint takes in a user's current subscriptions, gender, age, and zip code. The response is an array of objects consisting of the name of each recommended service and its corresponding offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.
 
 ### HTTP Request
 
@@ -211,10 +222,10 @@ This endpoint takes in a user's gender, age, zip code, and current subscriptions
 
 Parameter | Description
 --------- | -----------
-gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-age <span style="color:#8792a2; font-size:12px;">number</span> | User's age in years. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-zip <span style="color:#8792a2; font-size:12px;">number</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 subscriptions <span style="color:#8792a2; font-size:12px;">array</span> | List of user's current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+age <span style="color:#8792a2; font-size:12px;">integer</span> | User's age in years. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+zip <span style="color:#8792a2; font-size:12px;">integer</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -222,235 +233,75 @@ Don't forget your authentication key
 
 ![alt text](https://i.imgur.com/B2AQGK1.png "Recommendations")
 
+# Merchants
 
-# Memberships
-
-## Get All Memberships in the Lifespan Directory
+## Upload a SKU
 
 ```shell
-curl "https://api.lifespan.co/memberships"
-  -H "Authorization: {token}"
+curl -X POST https://api.lifespan.co/merchants
+    -H "Authorization: {token}"
+    -H "Content-Type: application/json"
+    -d '{
+         "name": "YouTubeTV",
+         "website": "https://tv.youtube.com"
+         "logo": "https://tv.youtube.com/logo",
+         "gender": "All",
+         "plans": [
+            {
+               "name": "Standard",
+               "price": 40.00,
+               "interval": "month",
+               "includes": [
+                  "DVR with unlimited storage",
+                  "Local and national live sports",
+                  "6 accounts per household",
+                  "3 simultaneous streams"
+               ],
+               "regions": ["United States"]
+            }
+         ],
+         offers: [
+            {
+               "description": "7 days free",
+               "qualifiers": null
+            },
+            {
+               "description": "1 month free",
+               "qualifiers": ["HBO Now", "Hulu", "Netflix"]
+            },
+            {
+               "description": "2 months free",
+               "qualifiers": ["SlingTV", "DirectTV", "DishTV"]
+            }
+         ]
+       }' 
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-"memberships": [
-  {  
-   "id":1,
-   "name":"Aaptiv",
-   "motto":"Workout with an audio-based personal trainer",
-   "description":"Aaptiv has popularized the audio-based workout. Expert trainers are in your ear guiding you as you exercise, providing techniques, tips, and encouragement. You’ll also hear fresh music hits and classic tracks paced to your workout. It can help you add structure to your gym sessions and make them more productive than ever.",
-   "website":"https://aaptiv.com/",
-   "status":"pending",
-   "service_medium":"digital",
-   "offers_trial":true,
-   "info":[  
-      ""
-   ],
-   "how_it_works":[  
-      "Enter your goals to find personalized programs and workouts",
-      "Choose a workout based on duration, trainer, music, and more",
-      "Put on your headphones and Aaptiv's trainers will guide your workout"
-   ],
-   "brand_color_code":"#0019FF",
-   "regions":[  
-      "US",
-      "Canada",
-      "UK",
-      ...
-   ],
-   "plans":[  
-      {  
-         "name":"Monthly",
-         "price":14.99,
-         "currency":"USD",
-         "includes":[  
-            "No free trial option",
-            "Automatically renews every month"
-         ],
-         "interval":"month",
-         "description":""
-      },
-      {  
-         "name":"Yearly",
-         "price":99.99,
-         "currency":"USD",
-         "includes":[  
-            "Includes a free 7-day trial",
-            "45% savings compared to monthly",
-            "Automatically renews every year"
-         ],
-         "interval":"annual",
-         "description":""
-      }
-   ],
-   "offers":[  
-      {  
-         "type":"free",
-         "duration":7,
-         "for_plan":"Yearly",
-         "description":"7 days free"
-      }
-   ],
-   "categories":[  
-      "Health & Wellness",
-      "Fitness",
-      "Health & Wellness",
-      "Fitness"
-   ]
-},
-  {
-    "id": 2,
-    ...
-  }
-  ....
-]
+   {
+      "status": 200,
+      "description": "SKU successfully uploaded"
+   }
 ```
 
-This endpoint retrieves all memberships.
+This endpoint takes in attributes of a subscription service. It returns an object with a 200 status code if the call succeeded.
 
 ### HTTP Request
 
-`GET https://api.lifespan.co/memberships`
+`POST https://api.lifespan.co/merchants`
 
-### Query Parameters
+### Payload
 
 Parameter | Description
 --------- | -----------
-service_medium | Value can be either `physical` or `digital` returns memberships of said medium.
-offers_trial | Value can be either `true` or `false`. If true, only returns memberships with a trial offer.
-region | Ex: 'United States'
-summary | If true the memberships will be sent with only id, motto, description and name. Default value is `false`.
-categories | If a selection of categories is given, results will be filtered accordingly. Comma separated. Default value is `all`.
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
-
-## Get a Specific Membership
-
-```shell
-curl "https://api.lifespan.co/memberships/1"
-  -H "Authorization: {token}"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{  
-   "id":1,
-   "name":"Aaptiv",
-   "motto":"Workout with an audio-based personal trainer",
-   "description":"Aaptiv has popularized the audio-based workout. Expert trainers are in your ear guiding you as you exercise, providing techniques, tips, and encouragement. You’ll also hear fresh music hits and classic tracks paced to your workout. It can help you add structure to your gym sessions and make them more productive than ever.",
-   "website":"https://aaptiv.com/",
-   "status":"pending",
-   "service_medium":"digital",
-   "offers_trial":true,
-   "info":[  
-      ""
-   ],
-   "how_it_works":[  
-      "Enter your goals to find personalized programs and workouts",
-      "Choose a workout based on duration, trainer, music, and more",
-      "Put on your headphones and Aaptiv's trainers will guide your workout"
-   ],
-   "brand_color_code":"#0019FF",
-   "regions":[  
-      "US",
-      "Canada",
-      "UK",
-      ...
-   ],
-   "plans":[  
-      {  
-         "name":"Monthly",
-         "price":14.99,
-         "currency":"USD",
-         "includes":[  
-            "No free trial option",
-            "Automatically renews every month"
-         ],
-         "interval":"month",
-         "description":""
-      },
-      {  
-         "name":"Yearly",
-         "price":99.99,
-         "currency":"USD",
-         "includes":[  
-            "Includes a free 7-day trial",
-            "45% savings compared to monthly",
-            "Automatically renews every year"
-         ],
-         "interval":"annual",
-         "description":""
-      }
-   ],
-   "offers":[  
-      {  
-         "type":"free",
-         "duration":7,
-         "for_plan":"Yearly",
-         "description":"7 days free"
-      }
-   ],
-   "categories":[  
-      "Health & Wellness",
-      "Fitness",
-      "Health & Wellness",
-      "Fitness"
-   ]
-}
-```
-
-This endpoint retrieves a specific membership.
-
-### HTTP Request
-
-`GET https://api.lifespan.co/memberships/<Name>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-Name | The Name of the membership to retrieve
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
-
-
-## Get All Categories
-
-```shell
-curl "https://api.lifespan.co/categories"
-  -H "Authorization: {token}"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "categories":[
-    {
-      "id":1,
-      "description":"Fitness"
-    },
-    {
-      "id":2,
-      "description":"Beauty"
-    }
-    ...
-  ]
-}
-```
-
-This endpoint retrieves a list of all categories.
-
-### HTTP Request
-
-`GET https://api.lifespan.co/categories`
+name <span style="color:#8792a2; font-size:12px;">string</span> | Name of subscription service. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+website <span style="color:#8792a2; font-size:12px;">string</span> | Website URL. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+logo <span style="color:#8792a2; font-size:12px;">string</span> | URL to hosted logo. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span>
+gender <span style="color:#8792a2; font-size:12px;">string</span> | The gender of the service's target demographic. Values can be either <span style="color:#cd3d64;">`Male`</span>, <span style="color:#cd3d64;">`Female`</span>, or <span style="color:#cd3d64;">`All`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+plans <span style="color:#8792a2; font-size:12px;">array</span> | An array of objects, with each object representing a plan. The plan object contains the following required information: the <span style="color:#cd3d64;">`name`</span> <span style="color:#8792a2; font-size:12px;">(string)</span> of the service, its <span style="color:#cd3d64;">`price`</span> <span style="color:#8792a2; font-size:12px;">(integer)</span> in USD, the billing <span style="color:#cd3d64;">`interval`</span> <span style="color:#8792a2; font-size:12px;">(string)</span>, a list of benefits and/or features the service <span style="color:#cd3d64;">`includes`</span> <span style="color:#8792a2; font-size:12px;">(array)</span> and a list of U.S. <span style="color:#cd3d64;">`regions`</span><span style="color:#8792a2; font-size:12px;">(array)</span> - cities or states - that the plan is available in. Send <span style="color:#cd3d64;">`"regions": ["United States"]`</span> if nationwide or <span style="color:#cd3d64;">`["Continental United States"]`</span> if available everywhere but Alaska and Hawaii. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span>
+offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of objects, with each object representing an offer. The offer object contains the following required information: the <span style="color:#cd3d64;">`description`</span> <span style="color:#8792a2; font-size:12px;">(string)</span> of the offer and subscription services that serve as <span style="color:#cd3d64;">`qualifiers`</span> <span style="color:#8792a2; font-size:12px;">(array)</span> for the offer if currently in use by a consumer. If the offer is available to anyone regardless of their current subscriptions, send <span style="color:#cd3d64;">`"qualifiers": null`</span> (the default value). <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span>
 
 <aside class="success">
 Don't forget your authentication key
