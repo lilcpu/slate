@@ -12,7 +12,7 @@ search: true
 
 # Introduction
 
-<span style="color:#32325D; font-size:28px; font-weight: 400; line-height: 42px;">APIs for <span style="color:#08B7B7; font-weight: 600">driving financial wellness</span> and <span style="color:#08B7B7; font-weight: 600">expanding cards on file</span> in the exploding Subscription Economy</span>
+<span style="color:#32325D; font-size:25px; font-weight: 400; line-height: 40px;">Lifespan offers APIs for <span style="color:#08B7B7; font-weight: 600">driving financial wellness</span> and <span style="color:#08B7B7; font-weight: 600">expanding cards on file</span> in the exploding Subscription Economy.</span>
 
 Lifespan is an end-to-end API for subscription management, discovery, and transactions. It's infrastructure that enables your cardholders to view, cancel, and add new subscription services frictionlessly within your web and mobile apps.
 
