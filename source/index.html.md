@@ -4,9 +4,6 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
-toc_footers:
-  - <a href='#'>Request a Developer Key</a>
-
 includes:
   - errors
 
@@ -21,6 +18,17 @@ The Lifespan API is organized around REST. Our API has predictable resource-orie
 
 You can use the Lifespan API in test mode, which does not affect live data.
 
+## Building User Experience
+
+You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a styleguide with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
+
+## Security & Privacy
+
+Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and all data to be used on handshake completion) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages. 
+
+We are acutely aware of common attack vectors that threaten the flow of seensitive data such as "Man in the Middle" attacks and IP Spoofing. We aim to provide confidence in Lifespan as a participant of any data transfer at all times. We only communicate via secure protocols (HTTPS, SSL) and when data is stored on Lifespan servers we take all necessary precautions to ensure that no bad actors have access to personalized data. 
+
+
 # Authentication
 
 ```shell
@@ -34,6 +42,10 @@ You must replace <code>token</code> with your personal API key.
 </aside>
 
 # Financial Wellness
+
+Lifespan offers two APIs intended to allow developers the ability to deliver a data driven client dashboard which informs the user of thier financial wellness as it relates to recurring payments; then take action on that information. The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user's recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user's monthly recurring spending.
+
+The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the <a href='#recurring-payments'>Recurring Payments API</a> to allow users to the ability to cancel any services found directly from your application; rather than from the service merchant's potentially convoluted cancellation flow. Provide a button or a toggle along side each entry in the list returned by the <a href='#recurring-payments'>Recurring Payments API</a> and make a call with the user's email and the merchants name. Lifespan will initiate a cancelation and return an id that can be used to track status. Your user will be updated via email and you may make a call to check for updates on the status of that cancellation. The <a href='#cancellations'>Cancellation API</a> provides a simple interface for you to provide your user with agency over thier recurring payments.
 
 # Recurring Payments
 
