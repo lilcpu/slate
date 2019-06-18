@@ -12,22 +12,21 @@ search: true
 
 # Introduction
 
-Welcome to the Lifespan API. You can use our API to access Lifespan API endpoints, which can get information on various subscription services, categories, and tools to analyze transaction statements to identify or recommend services to your users.
+<span style="color:#32325D; font-size:28px; font-weight: 400; line-height: 42px;">APIs for <span style="color:#08B7B7; font-weight: 600">driving financial wellness</span> and <span style="color:#08B7B7; font-weight: 600">expanding cards on file</span> in the exploding Subscription Economy</span>
 
-The Lifespan API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
+Lifespan is an end-to-end API for subscription management, discovery, and transactions. It's infrastructure that enables your cardholders to view, cancel, and add new subscription services frictionlessly within your web and mobile apps.
 
-You can use the Lifespan API in test mode, which does not affect live data.
+The Lifespan API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. You can use the Lifespan API in test mode, which does not affect live data.
 
-## Building User Experience
+# Building User Experience
 
 You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a <a href="#">styleguide</a> with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
 
-## Security & Privacy
+# Security & Privacy
 
 Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages.
 
 We use standard OAuth 2.0 protocol for authentication and authorization. See the <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
-
 
 # API Access
 
@@ -59,6 +58,10 @@ After you recieve an `access_token` you __must__ include it in the authorization
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
 </aside>
+
+# Building User Experience
+
+You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a styleguide with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
 
 # Financial Wellness
 
@@ -279,7 +282,7 @@ curl -X POST https://api.lifespan.co/merchants
                "regions": ["United States"]
             }
          ],
-         offers: [
+         "offers": [
             {
                "description": "7 days free",
                "qualifiers": null
