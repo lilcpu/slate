@@ -309,10 +309,10 @@ Don't forget your authentication key
 
 # Transactions (Coming Soon)
 
-Our next API will enable frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (McKinsey report) via one simple and secure API.
+Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (McKinsey report) via one simple and secure API.
 
 Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions: 1) management of current subscriptions and 2) discovery of new, recommended services. Facilitating the actual transaction is the natural next step.
 
-We are making the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to start a new trial or subscription service seamlessly. Merchants will receive the required user and payment information (your card) for a new sign up. It's a win-win-win for banks, merchants, and consumers.
+We are making the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to start a new trial or subscription service seamlessly. Merchants will receive the required user and payment information (your card) for a new sign up.
 
-We relentlessly prioritize security throughout and are excited to integrate management, discovery, and transactions all into one beautiful unified experience.
+We prioritize security throughout and are excited to integrate management, discovery, and transactions all into one beautiful unified experience.
