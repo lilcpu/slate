@@ -18,10 +18,6 @@ Lifespan is an end-to-end API for subscription management, discovery, and transa
 
 The Lifespan API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. You can use the Lifespan API in test mode, which does not affect live data.
 
-# Building User Experience
-
-You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a <a href="#">styleguide</a> with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
-
 # Security & Privacy
 
 Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages.
@@ -51,7 +47,7 @@ Content-Type: application/json
   "expires_in":86400
 }
 ```
-The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:
+The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/" target="_blank">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:
 
 1. Send us an email at __api@lifespan.co__ to request credentials for your organization.
 2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure. Preferrably in a file or store with limited permissions__.
@@ -345,9 +341,11 @@ offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of o
 Don't forget your authentication key
 </aside>
 
-# Transactions <small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
-
-Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers">McKinsey report</a>) via one simple and secure API.
+# Transactions
+<small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
+<br>
+<br>
+Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.
 
 Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
 
