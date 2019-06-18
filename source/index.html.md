@@ -20,17 +20,41 @@ The Lifespan API is organized around REST. Our API has predictable resource-orie
 
 # Security & Privacy
 
-Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and all data to be used on handshake completion) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages. 
+Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages.
 
-We are acutely aware of common attack vectors that threaten the flow of seensitive data such as "Man in the Middle" attacks and IP Spoofing. We aim to provide confidence in Lifespan as a participant of any data transfer at all times. We only communicate via secure protocols (HTTPS, SSL) and when data is stored on Lifespan servers we take all necessary precautions to ensure that no bad actors have access to personalized data. 
+We use standard OAuth 2.0 protocol for authentication and authorization. See the <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
 
+<<<<<<< HEAD
 # Authentication
+=======
+
+# API Access
+>>>>>>> a4dad04de278d102d5a1b6097b5b01796c34058a
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: {token}"
+curl "api.lifespan.co/oauth/token"
+  -H "Content-Type: application/x-www-form-urlencoded"
+  -d "grant_type=client_credentials&client_id={YOUR_CLIENT_ID}&client_secret={YOUR_CLIENT_SECRET}"
 ```
+> Sample Response
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "access_token":"eyJz93a...k4laUWw",
+  "token_type":"Bearer",
+  "expires_in":86400
+}
+```
+The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:
+
+1. Send us an email at __api@lifespan.co__ to request credentials for your organization.
+2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure. Preferrably in a file or store with limited permissions__.
+3. Request an `access_token` (see example)
+
+After you recieve an `access_token` you __must__ include it in the authorization header of each request to the Lifespan API like so: 
+`Authorization: Bearer {token}`
 
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
@@ -300,7 +324,7 @@ website <span style="color:#8792a2; font-size:12px;">string</span> | Website URL
 logo <span style="color:#8792a2; font-size:12px;">string</span> | URL to hosted logo. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span>
 gender <span style="color:#8792a2; font-size:12px;">string</span> | The gender of the service's target demographic. Values can be either <span style="color:#cd3d64;">`Male`</span>, <span style="color:#cd3d64;">`Female`</span>, or <span style="color:#cd3d64;">`All`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 plans <span style="color:#8792a2; font-size:12px;">array</span> | An array of objects, with each object representing a plan. The plan object contains the following required information: the <span style="color:#cd3d64;">`name`</span> <span style="color:#8792a2; font-size:12px;">(string)</span> of the service, its <span style="color:#cd3d64;">`price`</span> <span style="color:#8792a2; font-size:12px;">(integer)</span> in USD, the billing <span style="color:#cd3d64;">`interval`</span> <span style="color:#8792a2; font-size:12px;">(string)</span>, a list of benefits and/or features the service <span style="color:#cd3d64;">`includes`</span> <span style="color:#8792a2; font-size:12px;">(array)</span> and a list of U.S. <span style="color:#cd3d64;">`regions`</span><span style="color:#8792a2; font-size:12px;">(array)</span> - cities or states - that the plan is available in. Send <span style="color:#cd3d64;">`"regions": ["United States"]`</span> if nationwide or <span style="color:#cd3d64;">`["Continental United States"]`</span> if available everywhere but Alaska and Hawaii. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span>
-offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of objects, with each object representing an offer. The offer object contains 1. a <span style="color:#cd3d64;">`description`</span> <span style="color:#8792a2; font-size:12px;">(string)</span> of the offer. 2. A list of <span style="color:#cd3d64;">`qualifiers`</span> <span style="color:#8792a2; font-size:12px;">(array)</span>. These are subscriptions a target user may be engaged with currently which indicate interest or involvement in your service's space and __qualify__ them for a specific offer. If the offer is available to anyone regardless of their current subscriptions, send <span style="color:#cd3d64;">`"qualifiers": null`</span> (the default value). <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span>
+offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of objects, with each object representing an offer. The offer object contains 1. a <span style="color:#cd3d64;">`description`</span> <span style="color:#8792a2; font-size:12px;">(string)</span> of the offer. 2. A list of <span style="color:#cd3d64;">`qualifiers`</span> <span style="color:#8792a2; font-size:12px;">(array)</span>. Qualifiers are subscriptions a target user may be engaged with currently which indicate interest in your category or engagement with competing services; thus __qualifying__ them for a specific offer. If the offer is available to anyone regardless of their current subscriptions, send <span style="color:#cd3d64;">`"qualifiers": null`</span> (the default value). <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span>
 
 <aside class="success">
 Don't forget your authentication key
