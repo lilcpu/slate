@@ -32,10 +32,29 @@ We are acutely aware of common attack vectors that threaten the flow of seensiti
 # Authentication
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: {token}"
+curl "api.lifespan.co/oauth/token"
+  -H "Content-Type: application/x-www-form-urlencoded"
+  -d "grant_type=client_credentials&client_id={YOUR_CLIENT_ID}&client_secret={YOUR_CLIENT_SECRET}"
 ```
+> Sample Response
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+{
+  "access_token":"eyJz93a...k4laUWw",
+  "token_type":"Bearer",
+  "expires_in":86400
+}
+```
+The Lifespan API implements the OAuth 2.0 client credentials grant flow. There are a few steps to get set up with keys:
+
+1. Send us an email at __api@lifespan.co__ to request credentials for your organization.
+2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure. Preferrably in a file or store with limited permissions__.
+3. Request an `access_token` (see example)
+
+After you recieve an `access_token` you __must__ include it in the authorization header of each request to the Lifespan API like so: 
+`Authorization: Bearer {token}`
 
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
