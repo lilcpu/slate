@@ -24,12 +24,12 @@ You will build a consumer facing user experience directly into your web or mobil
 
 ## Security & Privacy
 
-Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and all data to be used on handshake completion) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages. 
+Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages.
 
-We are acutely aware of common attack vectors that threaten the flow of seensitive data such as "Man in the Middle" attacks and IP Spoofing. We aim to provide confidence in Lifespan as a participant of any data transfer at all times. We only communicate via secure protocols (HTTPS, SSL) and when data is stored on Lifespan servers we take all necessary precautions to ensure that no bad actors have access to personalized data. 
+We use standard OAuth 2.0 protocol for authentication and authorization. See the <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
 
 
-# Authentication
+# API Access
 
 ```shell
 curl "api.lifespan.co/oauth/token"
