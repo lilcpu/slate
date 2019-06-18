@@ -260,7 +260,7 @@ curl -X POST https://api.lifespan.co/merchants
                "regions": ["United States"]
             }
          ],
-         offers: [
+         "offers": [
             {
                "description": "7 days free",
                "qualifiers": null
