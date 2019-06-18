@@ -26,7 +26,12 @@ You will build a consumer facing user experience directly into your web or mobil
 
 Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages.
 
-We use standard OAuth 2.0 protocol for authentication and authorization. See the <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
+We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
+
+# Building User Experience
+
+You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a <a href="#">styleguide</a> with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
+
 
 # API Access
 
@@ -58,10 +63,6 @@ After you recieve an `access_token` you __must__ include it in the authorization
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
 </aside>
-
-# Building User Experience
-
-You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a styleguide with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
 
 # Financial Wellness
 
@@ -329,12 +330,15 @@ offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of o
 Don't forget your authentication key
 </aside>
 
-# Transactions (Coming Soon)
+# Transactions <small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
 
-Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (McKinsey report) via one simple and secure API.
+Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers">McKinsey report</a>) via one simple and secure API.
 
-Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions: 1) management of current subscriptions and 2) discovery of new, recommended services. Facilitating the actual transaction is the natural next step.
+Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
 
-We are making the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to start a new trial or subscription service seamlessly. Merchants will receive the required user and payment information (your card) for a new sign up.
+1. Management of current subscriptions
+2. Discovery of new, recommended services
 
-We prioritize security throughout and are excited to integrate management, discovery, and transactions all into one beautiful unified experience.
+Facilitating the actual transaction is the natural next step.
+
+We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.
