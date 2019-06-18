@@ -24,12 +24,7 @@ Security is paramount at Lifespan. As such, our data footprint is kept to an abs
 
 We use standard OAuth 2.0 protocol for authentication and authorization. See the <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
 
-<<<<<<< HEAD
-# Authentication
-=======
-
 # API Access
->>>>>>> a4dad04de278d102d5a1b6097b5b01796c34058a
 
 ```shell
 curl "api.lifespan.co/oauth/token"
