@@ -47,7 +47,7 @@ Content-Type: application/json
   "expires_in":86400
 }
 ```
-The Lifespan API implements the OAuth 2.0 client credentials grant flow. There are a few steps to get set up with keys:
+The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:
 
 1. Send us an email at __api@lifespan.co__ to request credentials for your organization.
 2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure. Preferrably in a file or store with limited permissions__.
