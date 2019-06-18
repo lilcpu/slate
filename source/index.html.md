@@ -20,7 +20,7 @@ You can use the Lifespan API in test mode, which does not affect live data.
 
 ## Building User Experience
 
-You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a styleguide with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
+You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a <a href="#">styleguide</a> with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
 
 ## Security & Privacy
 
@@ -32,7 +32,7 @@ We use standard OAuth 2.0 protocol for authentication and authorization. See the
 # API Access
 
 ```shell
-curl "api.lifespan.co/oauth/token"
+curl "https://api.lifespan.co/oauth/token"
   -H "Content-Type: application/x-www-form-urlencoded"
   -d "grant_type=client_credentials&client_id={YOUR_CLIENT_ID}&client_secret={YOUR_CLIENT_SECRET}"
 ```
@@ -92,7 +92,7 @@ curl -d '{"transactions":"<transactionHistoryJSONString>"}'
 }
 ```
 
-This endpoint returns a list of all recurring payments found in a given transaction history. They are organized by accountId which is a plaid construct to securley mask sensitive details of an account. The `price` field of the returned services is always in cents.
+This endpoint returns a list of all recurring payments found in a given transaction history. They are organized by `accountId` which is a plaid construct to securely mask sensitive details of an account. The `price` field of the returned services is always in cents.
 
 ### HTTP Request
 
