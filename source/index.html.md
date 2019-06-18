@@ -75,7 +75,20 @@ The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem wit
 ## Get All Recurring Payments in a Transaction History
 
 ```shell
-curl -d '{"transactions":"<transactionHistoryJSONString>"}' 
+curl -d '{
+  "transactions":[ 
+    {
+      "price":"12.99",
+      "name":"spotify",
+      "date":"01/02/2019"
+    },
+    {
+      "price":"15.99",
+      "name":"netflix",
+      "date":"01/02/2019"
+    },
+    ...
+  ]}' 
     -H "Content-Type: application/json"
     -H "Authorization: {token}" 
     -X POST https://api.lifespan.co/services
@@ -85,18 +98,20 @@ curl -d '{"transactions":"<transactionHistoryJSONString>"}'
 
 ```json
 {
-  "services" : {
-    "RgyPLBjx0qiJ1y5zB0gkc8P3qgE5dPIymdrYB" : [
+  "services" : [
       {
         "name": "Spotify",
         "price": 1299
-      }
+      },
+      {
+        "name": "Netflix",
+        "price": 1599
+      },
     ]
-  }
 }
 ```
 
-This endpoint returns a list of all recurring payments found in a given transaction history. They are organized by `accountId` which is a plaid construct to securely mask sensitive details of an account. The `price` field of the returned services is always in cents.
+This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant `name` and the `price` of the service. The `price` field of the returned services is always in cents.
 
 ### HTTP Request
 
@@ -106,7 +121,7 @@ This endpoint returns a list of all recurring payments found in a given transact
 
 Parameter | Description
 --------- | -----------
-transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. __Must include price, date and name fields__ <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
