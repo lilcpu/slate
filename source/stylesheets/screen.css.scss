@@ -62,8 +62,6 @@ html, body {
   font-size: 13px;
   font-weight: bold;
 
-  border-right: 1px solid #e3e8ee;
-
   // language selector for mobile devices
   .lang-selector {
     display: none;
@@ -76,10 +74,7 @@ html, body {
   // This is the logo at the top of the ToC
   .logo {
     display: block;
-    max-width: 50%;
-    margin-right: auto;
-    margin-left: 1em;
-    margin-top: 1.5em;
+    max-width: 100%;
     margin-bottom: $logo-margin;
   }
 
@@ -182,7 +177,7 @@ html, body {
   .toc-footer {
     padding: 1em 0;
     margin-top: 1em;
-    border-top: 1px solid $nav-footer-border-color;
+    border-top: 1px dashed $nav-footer-border-color;
 
     li,a {
       color: $nav-text;
@@ -209,32 +204,9 @@ html, body {
   text-overflow: ellipsis;
   text-decoration: none;
   color: $nav-text;
-  font-weight: 500;
-  font-size: 14px;
-  // line-height: 20px;
   transition-property: background;
   transition-timing-function: linear;
   transition-duration: 130ms;
-  transition: color .2s ease;
-}
-
-.toc-link:hover {
-  color: #131f41
-}
-
-.toc-h1[data-title="Financial Wellness"], .toc-h1[data-title="Commerce"] {
-  color: #a3acb9;
-  text-transform: uppercase;
-  letter-spacing: .01em;
-  font-size: 12px;
-  margin-top: 1.25em;
-  margin-bottom: 0.25em;
-  font-weight: bold;
-  transition: color .2s ease;
-}
-
-.toc-h1:hover {
-  color: #131f41
 }
 
 // button to show navigation on mobile devices
@@ -375,13 +347,12 @@ html, body {
   h1 {
     @extend %header-font;
     font-size: 25px;
-    // padding-top: 0.5em;
-    padding-top: 2.5em;
+    padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #e3e8ee;
-    // border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     background-color: #fdfdfd;
   }
 
