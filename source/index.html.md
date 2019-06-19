@@ -73,28 +73,32 @@ You will build a consumer-facing user experience directly into your web or mobil
 
 ## Displaying Recurring Payments, Cancellation Buttons, and Recommendations
 
-Display the results of a call to the <a href="#recurring-services">Recurring Payments API</a> in a list. If you are using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If using the <a href="#recomendations">Recommendations API</a> display the recommendations returned from your call in a module below the user's current recurring payments.
-![alt text](https://i.imgur.com/x4771xn.png "List of a user's recurring services with cancellation action")
+Display the results of a call to the <a href="#recurring-services">Recurring Payments API</a> in a list. If you're using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you're using the <a href="#recomendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user's current recurring payments.
+
+![alt text](https://i.imgur.com/XvHUjmi.png "Displaying Recurring Payments and Recommendations Modules")
 
 ## Displaying the Cancellation Modal
 
-Display the cancellation modal cleanly, either with a popup or in a reusable component space. Here we reuse the space that was once populated by reccomendations. After the action is complete, remove the modal and repopulate with more relevant information. 
-![alt text](https://i.imgur.com/HMUYi7t.png "Show the cancellation modal in close proximity to where the action was initiated")
+Upon clicking or tapping a cancellation button, render a popup modal prompting the user for their email associated with the given service. The modal should appear over the list of recurring services.
+ 
+![alt text](https://i.imgur.com/XAB4vD7.png "Cancellation Modal")
 
-## Visualizing User Spending
+## Visualizing Monthly Payments
 
-Donut charts are a great way of visualizing monthly data. Show the total monthly spend somewhere prominent. Show merchant information and individual spend. Use logos to convey bland merchant data without cluttering the visualization. The user should be able to hover over or click into each section of your chart for full details. Consider including a legend for quick looks.
+Donut charts are a great way to visualize monthly data. Show the total monthly spend in the center. Users should be able to hover over or click each section of your chart to view full details. Consider including a legend for added clarity.
 
 ![alt text](https://i.imgur.com/n8FUqnI.png "Pie chart breakdown of a user's monthly spend")
 # Financial Wellness
 
-Lifespan offers two APIs intended to allow developers the ability to deliver a data driven client dashboard which informs the user of thier financial wellness as it relates to recurring payments; then take action on that information. The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user's recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user's monthly recurring spending.
+Lifespan offers two APIs that enable cardholders to view and cancel recurring payments.
 
-The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Recurring Payments API to allow users to the ability to cancel any services found directly from your application; rather than from the service merchant's potentially convoluted cancellation flow. Provide a button or a toggle along side each entry in the list returned by the Recurring Payments API and make a call with the user's email and the merchants name. Lifespan will initiate a cancelation and return an id that can be used to track status. Your user will be updated via email and you may make a call to check for updates on the status of that cancellation. The Cancellation API provides a simple interface for you to provide your user with agency over thier recurring payments.
+ The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user's recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user's monthly recurring spend.
+
+The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Recurring Payments API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants' potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.
 
 # Recurring Payments
 
-## Get All Recurring Payments in a Transaction History
+## Get All Recurring Payments from a Transaction History
 
 ```shell
 curl -d '{
