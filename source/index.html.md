@@ -17,13 +17,13 @@ The Lifespan API is organized around REST. Our API has predictable resource-orie
 
 # Security & Privacy
 
-Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messaging.
+Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#style-guide">style guide</a> for examples of security screens and messaging.
 
 We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionaly, our APIs only communicate via HTTPS to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
 
 # Building User Experience
 
-You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a <a href="#">styleguide</a> with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
+You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a <a href="#style-guide">style guide</a> with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
 
 
 # API Access
@@ -74,7 +74,7 @@ Error Code | Meaning
 
 # Style Guide
 
-These are a few examples of frontend componentes that leverage various features of the Lifespan API.
+Here are a few examples of frontend components that integrate with various features of the Lifespan API.
 
 ## Displaying Recurring Services With Cancellation Switch
 
