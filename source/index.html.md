@@ -88,7 +88,7 @@ Display the cancellation modal cleanly, either with a popup or in a reusable com
 
 ## Visualizing User Spending
 
-Donut charts are a great way of visualizing monthly data. Show the total monthly spend somewhere prominent. Show merchant information and individual spend. Logos are a very nice way of conveying bland merchant data without cluttering the visualization. The user should be able to hover over each section of your chart for full details. Consider including a legend for quick looks.
+Donut charts are a great way of visualizing monthly data. Show the total monthly spend somewhere prominent. Show merchant information and individual spend. Use logos to convey bland merchant data without cluttering the visualization. The user should be able to hover over or click into each section of your chart for full details. Consider including a legend for quick looks.
 
 ![alt text](https://i.imgur.com/n8FUqnI.png "Pie chart breakdown of a user's monthly spend")
 # Financial Wellness
