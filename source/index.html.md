@@ -4,9 +4,6 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
-includes:
-  - errors
-
 search: true
 ---
 
@@ -20,14 +17,14 @@ The Lifespan API is organized around REST. Our API has predictable resource-orie
 
 # Security & Privacy
 
-Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages.
+Security is priority number one at Lifespan. Our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit, and it is always anonymized. Anytime we need access to sensitive data from your user we __require__ explicit user opt-in. Check out <a href="#building-user-experience">Building User Experience</a> for examples of security screens and messaging.
 
-We use standard OAuth 2.0 protocol for authentication and authorization. See the <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
+We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionally, our APIs only communicate via HTTPS to guard against man-in-the-middle attacks and other methods of tampering with communication between your servers and ours.
 
 # API Access
 
 ```shell
-curl "api.lifespan.co/oauth/token"
+curl "https://api.lifespan.co/oauth/token"
   -H "Content-Type: application/x-www-form-urlencoded"
   -d "grant_type=client_credentials&client_id={YOUR_CLIENT_ID}&client_secret={YOUR_CLIENT_SECRET}"
 ```
@@ -37,16 +34,16 @@ curl "api.lifespan.co/oauth/token"
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
-  "access_token":"eyJz93a...k4laUWw",
-  "token_type":"Bearer",
-  "expires_in":86400
+  "access_token": "eyJz93a...k4laUWw",
+  "token_type": "Bearer",
+  "expires_in": 86400
 }
 ```
-The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:
+The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/" target="_blank">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:
 
 1. Send us an email at __api@lifespan.co__ to request credentials for your organization.
-2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure. Preferrably in a file or store with limited permissions__.
-3. Request an `access_token` (see example)
+2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure.__
+3. Request an `access_token` (see example).
 
 After you recieve an `access_token` you __must__ include it in the authorization header of each request to the Lifespan API like so: 
 `Authorization: Bearer {token}`
@@ -55,22 +52,69 @@ After you recieve an `access_token` you __must__ include it in the authorization
 You must replace <code>token</code> with your personal API key.
 </aside>
 
+# Errors
+
+The Lifespan API uses the following error codes:
+
+
+Error Code | Meaning
+---------- | -------
+400 | Bad Request -- Your request is invalid.
+401 | Unauthorized -- Your API key is wrong.
+403 | Forbidden -- The resource requested is not available to you.
+404 | Not Found -- The specified resource could not be found.
+405 | Method Not Allowed -- You tried to access a resource with an invalid method.
+500 | Internal Server Error -- We had a problem with our server. Try again later.
+503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
+
 # Building User Experience
 
-You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. We offer a styleguide with suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
+You will build a consumer-facing user experience directly into your web or mobile application. Below are a few suggestions and examples of how you might build your front-end components and the flows that connect them, but ultimately the choice is yours as for how to best present data and functionality to users.
 
+## Displaying Recurring Payments, Cancellation Buttons, and Recommendations
+
+Display the results of a call to the <a href="#recurring-services">Recurring Payments API</a> in a list. If you're using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you're using the <a href="#recomendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user's current recurring payments.
+
+![alt text](https://i.imgur.com/XvHUjmi.png "Displaying Recurring Payments and Recommendations Modules")
+
+## Displaying the Cancellation Modal
+
+Upon clicking or tapping a cancellation button, render a popup modal prompting the user for their email associated with the given service. The modal should appear over the list of recurring services.
+ 
+![alt text](https://i.imgur.com/XAB4vD7.png "Cancellation Modal")
+
+## Visualizing Monthly Payments
+
+Donut charts are a great way to visualize monthly data. Show the total monthly spend in the center. Users should be able to hover over or click each section of your chart to view full details. Consider including a legend for added clarity.
+
+![alt text](https://i.imgur.com/n8FUqnI.png "Pie chart breakdown of a user's monthly spend")
 # Financial Wellness
 
-Lifespan offers two APIs intended to allow developers the ability to deliver a data driven client dashboard which informs the user of thier financial wellness as it relates to recurring payments; then take action on that information. The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user's recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user's monthly recurring spending.
+Lifespan offers two APIs that enable cardholders to view and cancel recurring payments.
 
-The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Recurring Payments API to allow users to the ability to cancel any services found directly from your application; rather than from the service merchant's potentially convoluted cancellation flow. Provide a button or a toggle along side each entry in the list returned by the Recurring Payments API and make a call with the user's email and the merchants name. Lifespan will initiate a cancelation and return an id that can be used to track status. Your user will be updated via email and you may make a call to check for updates on the status of that cancellation. The Cancellation API provides a simple interface for you to provide your user with agency over thier recurring payments.
+ The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user's recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user's monthly recurring spend.
+
+The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Recurring Payments API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants' potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.
 
 # Recurring Payments
 
-## Get All Recurring Payments in a Transaction History
+## Get All Recurring Payments from a Transaction History
 
 ```shell
-curl -d '{"transactions":"<transactionHistoryJSONString>"}' 
+curl -d '{
+    "transactions":[ 
+      {
+        "amount":"12.99",
+        "name":"spotify",
+        "date":"01/02/2019"
+      },
+      {
+        "amount":"15.99",
+        "name":"netflix",
+        "date":"01/02/2019"
+      },
+      ...
+    ]}' 
     -H "Content-Type: application/json"
     -H "Authorization: {token}" 
     -X POST https://api.lifespan.co/services
@@ -80,18 +124,20 @@ curl -d '{"transactions":"<transactionHistoryJSONString>"}'
 
 ```json
 {
-  "services" : {
-    "RgyPLBjx0qiJ1y5zB0gkc8P3qgE5dPIymdrYB" : [
+  "services" : [
       {
         "name": "Spotify",
         "price": 1299
-      }
+      },
+      {
+        "name": "Netflix",
+        "price": 1599
+      },
     ]
-  }
 }
 ```
 
-This endpoint returns a list of all recurring payments found in a given transaction history. They are organized by accountId which is a plaid construct to securley mask sensitive details of an account. The `price` field of the returned services is always in cents.
+This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant `name` and the `price` of the service. The `price` field of the returned services is always in cents.
 
 ### HTTP Request
 
@@ -101,7 +147,7 @@ This endpoint returns a list of all recurring payments found in a given transact
 
 Parameter | Description
 --------- | -----------
-transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. __Must include amount, date and name fields__ <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -327,12 +373,17 @@ offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of o
 Don't forget your authentication key
 </aside>
 
-# Transactions (Coming Soon)
+# Transactions
+<small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
+<br>
+<br>
+Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.
 
-Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (McKinsey report) via one simple and secure API.
+Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
 
-Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions: 1) management of current subscriptions and 2) discovery of new, recommended services. Facilitating the actual transaction is the natural next step.
+1. Management of current subscriptions
+2. Discovery of new, recommended services
 
-We are making the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to start a new trial or subscription service seamlessly. Merchants will receive the required user and payment information (your card) for a new sign up.
+Facilitating the actual transaction is the natural next step.
 
-We prioritize security throughout and are excited to integrate management, discovery, and transactions all into one beautiful unified experience.
+We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.
