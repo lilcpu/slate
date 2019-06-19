@@ -72,6 +72,25 @@ Error Code | Meaning
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
 
+# Style Guide
+
+These are a few examples of frontend componentes that leverage various features of the Lifespan API.
+
+## Displaying Recurring Services With Cancellation Switch
+
+Display the results of a call to The <a href="#recurring-services">Recurring Services API</a> in an html list. If using the <a href="#cancellations">Cancellation API</a> to allow users to cancel from inside your application add a toggle or a cancel button to the list element. If using the <a href="#recomendations">Recommendations API</a> display the recommendations returned from your call concisely. Presenting too many reccomendations may be a deterent to your user.
+![alt text](https://i.imgur.com/x4771xn.png "List of a user's recurring services with cancellation action")
+
+## Displaying the Cancellation Modal
+
+Display the cancellation modal cleanly, either with a popup or in a reusable component space. Here we reuse the space that was once populated by reccomendations. After the action is complete, remove the modal and repopulate with more relevant information. 
+![alt text](https://i.imgur.com/HMUYi7t.png "Show the cancellation modal in close proximity to where the action was initiated")
+
+## Visualizing User Spending
+
+Donut charts are a great way of visualizing monthly data. Show the total monthly spend somewhere prominent. Show merchant information and individual spend. Logos are a very nice way of conveying bland merchant data without cluttering the visualization. The user should be able to hover over each section of your chart for full details. Consider including a legend for quick looks.
+
+![alt text](https://i.imgur.com/n8FUqnI.png "Pie chart breakdown of a user's monthly spend")
 # Financial Wellness
 
 Lifespan offers two APIs intended to allow developers the ability to deliver a data driven client dashboard which informs the user of thier financial wellness as it relates to recurring payments; then take action on that information. The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user's recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user's monthly recurring spending.
