@@ -98,19 +98,19 @@ The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem wit
 
 ```shell
 curl -d '{
-  "transactions":[ 
-    {
-      "amount":"12.99",
-      "name":"spotify",
-      "date":"01/02/2019"
-    },
-    {
-      "amount":"15.99",
-      "name":"netflix",
-      "date":"01/02/2019"
-    },
-    ...
-  ]}' 
+    "transactions":[ 
+      {
+        "amount":"12.99",
+        "name":"spotify",
+        "date":"01/02/2019"
+      },
+      {
+        "amount":"15.99",
+        "name":"netflix",
+        "date":"01/02/2019"
+      },
+      ...
+    ]}' 
     -H "Content-Type: application/json"
     -H "Authorization: {token}" 
     -X POST https://api.lifespan.co/services
