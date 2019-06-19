@@ -4,9 +4,6 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
-includes:
-  - errors
-
 search: true
 ---
 
@@ -20,9 +17,9 @@ The Lifespan API is organized around REST. Our API has predictable resource-orie
 
 # Security & Privacy
 
-Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messages.
+Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out the <a href="#">styleguide</a> for examples of security screens and messaging.
 
-We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionaly, our apis only communicate via https to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
+We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionaly, our APIs only communicate via HTTPS to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
 
 # Building User Experience
 
@@ -59,6 +56,21 @@ After you recieve an `access_token` you __must__ include it in the authorization
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
 </aside>
+
+# Errors
+
+The Lifespan API uses the following error codes:
+
+
+Error Code | Meaning
+---------- | -------
+400 | Bad Request -- Your request is invalid.
+401 | Unauthorized -- Your API key is wrong.
+403 | Forbidden -- The resource requested is not available to you.
+404 | Not Found -- The specified resource could not be found.
+405 | Method Not Allowed -- You tried to access a resource with an invalid method.
+500 | Internal Server Error -- We had a problem with our server. Try again later.
+503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
 
 # Financial Wellness
 
