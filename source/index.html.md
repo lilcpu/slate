@@ -17,9 +17,9 @@ The Lifespan API is organized around REST. Our API has predictable resource-orie
 
 # Security & Privacy
 
-Security is paramount at Lifespan. As such, our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit and any time we need access to sensitive data from your user we __require__ the handshake (and the actionable result of said handshake) be made explicitly clear to your users. Check out <a href="#building-user-experience">Buidling User Experience</a> for examples of security screens and messaging.
+Security is priority number one at Lifespan. Our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit, and it is always anonymized. Anytime we need access to sensitive data from your user we __require__ explicit user opt-in. Check out <a href="#building-user-experience">Building User Experience</a> for examples of security screens and messaging.
 
-We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionaly, our APIs only communicate via HTTPS to gaurd against man-in-the-middle attacks and other methods of tampering with the communication between your servers and our API.
+We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionally, our APIs only communicate via HTTPS to guard against man-in-the-middle attacks and other methods of tampering with communication between your servers and ours.
 
 # API Access
 
@@ -34,16 +34,16 @@ curl "https://api.lifespan.co/oauth/token"
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
-  "access_token":"eyJz93a...k4laUWw",
-  "token_type":"Bearer",
-  "expires_in":86400
+  "access_token": "eyJz93a...k4laUWw",
+  "token_type": "Bearer",
+  "expires_in": 86400
 }
 ```
 The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/" target="_blank">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:
 
 1. Send us an email at __api@lifespan.co__ to request credentials for your organization.
-2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure. Preferrably in a file or store with limited permissions__.
-3. Request an `access_token` (see example)
+2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure.__
+3. Request an `access_token` (see example).
 
 After you recieve an `access_token` you __must__ include it in the authorization header of each request to the Lifespan API like so: 
 `Authorization: Bearer {token}`
@@ -69,11 +69,11 @@ Error Code | Meaning
 
 # Building User Experience
 
-You will build a consumer facing user experience directly into your web or mobile application. Because you own your application's frontend there are a plethora of implementations that may make sense for your use case. Below are a few suggestions and examples of how you might build your components and the flows that connect them, but ultimately the choice is in your hands of how to best present data and functionality to your users.
+You will build a consumer-facing user experience directly into your web or mobile application. Below are a few suggestions and examples of how you might build your front-end components and the flows that connect them, but ultimately the choice is yours as for how to best present data and functionality to users.
 
-## Displaying Recurring Services With Cancellation Switch
+## Displaying Recurring Payments, Cancellation Buttons, and Recommendations
 
-Display the results of a call to The <a href="#recurring-services">Recurring Services API</a> in an html list. If using the <a href="#cancellations">Cancellation API</a> to allow users to cancel from inside your application add a toggle or a cancel button to the list element. If using the <a href="#recomendations">Recommendations API</a> display the recommendations returned from your call concisely. Presenting too many reccomendations may be a deterent to your user.
+Display the results of a call to the <a href="#recurring-services">Recurring Payments API</a> in a list. If you are using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If using the <a href="#recomendations">Recommendations API</a> display the recommendations returned from your call in a module below the user's current recurring payments.
 ![alt text](https://i.imgur.com/x4771xn.png "List of a user's recurring services with cancellation action")
 
 ## Displaying the Cancellation Modal
