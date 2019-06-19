@@ -14,7 +14,7 @@ search: true
 
 <span style="color:#32325D; font-size:25px; font-weight: 400; line-height: 40px;">Lifespan offers APIs for <span style="color:#08B7B7; font-weight: 600">driving financial wellness</span> and <span style="color:#08B7B7; font-weight: 600">expanding cards on file</span> in the exploding Subscription Economy.</span>
 
-Lifespan is an end-to-end API for subscription management, discovery, and transactions. It's infrastructure that enables your cardholders to view, cancel, and add new subscription services frictionlessly within your web and mobile apps.
+Lifespan is an end-to-end API for subscription management, discovery, and transactions. It's infrastructure that enables your cardholders to view, cancel, and add new subscription services frictionlessly within your web and mobile apps. You can integrate any feature individually or all together as a bundle.
 
 The Lifespan API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. You can use the Lifespan API in test mode, which does not affect live data.
 
@@ -179,6 +179,8 @@ Don't forget your authentication key
 </aside>
 
 # Commerce
+
+Giving cardholders the ability to track and cancel recurring payments not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy continues to grow (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">data</a>), use our APIs to actively drive increasing and reliable interchange revenue.
 
 # Recommendations
 
