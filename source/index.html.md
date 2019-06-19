@@ -73,7 +73,7 @@ You will build a consumer facing user experience directly into your web or mobil
 
 ## Displaying Recurring Services With Cancellation Switch
 
-Display the results of a call to The <a href="#recurring-services">Recurring Services API</a> in an html list. If using the <a href="#cancellations">Cancellation API</a> to allow users to cancel from inside your application add a toggle or a cancel button to the list element. If using the <a href="#recomendations">Recommendations API</a> display the recommendations returned from your call concisely. Presenting too many reccomendations may be a deterent to your user.
+Display the results of a call to The <a href="#recurring-services">Recurring Services API</a> in an html list. If using the <a href="#cancellations">Cancellation API</a> to allow users to cancel from inside your application add a toggle or a cancel button to the list element. If using the <a href="#recommendations">Recommendations API</a> display the recommendations returned from your call concisely. Presenting too many reccomendations may be a deterent to your user.
 ![alt text](https://i.imgur.com/x4771xn.png "List of a user's recurring services with cancellation action")
 
 ## Displaying the Cancellation Modal
