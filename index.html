@@ -330,8 +330,7 @@
 <li>Request an <code>access_token</code> (see example).</li>
 </ol>
 
-<p>After you recieve an <code>access_token</code> you <strong>must</strong> include it in the authorization header of each request to the Lifespan API like so: 
-<code>Authorization: Bearer {token}</code></p>
+<p>After you recieve an <code>access_token</code> store it in your database for future use. When making requests to the Lifespan API you <strong>must</strong> include the token in the authorization header like so: <code>Authorization: Bearer {token}</code></p>
 
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
@@ -516,7 +515,7 @@ Don't forget your authentication key
 Don't forget your authentication key
 </aside>
 <h1 id='commerce'>Commerce</h1>
-<p>Giving cardholders the ability to track and cancel recurring payments not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy continues to grow (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">data</a>), use our APIs to actively drive increasing and reliable interchange revenue.</p>
+<p>Giving cardholders the ability to track and cancel recurring payments not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy <a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">continues to grow </a>, use our APIs to actively drive increasing and reliable interchange revenue.</p>
 <h1 id='recommendations'>Recommendations</h1><h2 id='get-recommended-services-for-a-user'>Get Recommended Services for a User</h2><pre class="highlight shell tab-shell"><code>curl -X GET https://api.lifespan.co/recommendations
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
