@@ -15,11 +15,15 @@ Lifespan is an end-to-end API for subscription management, discovery, and transa
 
 The Lifespan API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. You can use the Lifespan API in test mode, which does not affect live data.
 
+![alt text](https://i.imgur.com/oRas4vj.png "Lifespan Layers")
+
 # Security & Privacy
 
-Security is priority number one at Lifespan. Our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit, and it is always anonymized. Anytime we need access to sensitive data from your user we __require__ explicit user opt-in. Check out <a href="#building-user-experience">Building User Experience</a> for examples of security screens and messaging.
+Security is priority number one at Lifespan. Our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers. We require explicit user opt-in anytime we need their data to perform a task. None of our APIs require data tied to a human identity; thus, data within Lifespan systems is always anonymized.
 
-We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionally, our APIs only communicate via HTTPS to guard against man-in-the-middle attacks and other methods of tampering with communication between your servers and ours.
+To protect data in transit, all communications between you and Lifespan are encrypted via SSL using 2048-bit certificates. We use <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank">HSTS</a> to ensure requests interact with Lifespan only over HTTPS. At rest, all of the anonymous data is encrypted with AES-256.
+
+We use the standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below for instructions to get keys.
 
 # API Access
 
