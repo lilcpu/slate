@@ -15,11 +15,15 @@ Lifespan is an end-to-end API for subscription management, discovery, and transa
 
 The Lifespan API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. You can use the Lifespan API in test mode, which does not affect live data.
 
+![alt text](https://i.imgur.com/oRas4vj.png "Lifespan Layers")
+
 # Security & Privacy
 
-Security is priority number one at Lifespan. Our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers, data is encrypted in transit, and it is always anonymized. Anytime we need access to sensitive data from your user we __require__ explicit user opt-in. Check out <a href="#building-user-experience">Building User Experience</a> for examples of security screens and messaging.
+Security is priority number one at Lifespan. Our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers. We require explicit user opt-in anytime we need their data to perform a task. None of our APIs require data tied to a human identity; thus, data within Lifespan systems is always anonymized.
 
-We use standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below to get keys. Additionally, our APIs only communicate via HTTPS to guard against man-in-the-middle attacks and other methods of tampering with communication between your servers and ours.
+To protect data in transit, all communications between you and Lifespan are encrypted via SSL using 2048-bit certificates. We use <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank">HSTS</a> to ensure requests interact with Lifespan only over HTTPS. At rest, all of the anonymous data is encrypted with AES-256.
+
+We use the standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below for instructions to get keys.
 
 # API Access
 
@@ -136,7 +140,7 @@ curl -d '{
 }
 ```
 
-This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant `name` and the `price` of the service. The `price` field of the returned services is always in cents.
+This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
 
 ### HTTP Request
 
@@ -232,7 +236,7 @@ Giving cardholders the ability to track and cancel recurring payments not only e
 ## Get Recommended Services for a User
 
 ```shell
-curl -X GET https://api.lifespan.co/recommendations
+curl -X POST https://api.lifespan.co/recommendations
     -H "Authorization: {token}"
     -H "Content-Type: application/json"
     -d '{
@@ -281,16 +285,16 @@ This endpoint takes in a user's current subscriptions, gender, age, and zip code
 
 ### HTTP Request
 
-`GET https://api.lifespan.co/recommendations`
+`POST https://api.lifespan.co/recommendations`
 
 ### Payload
 
 Parameter | Description
 --------- | -----------
 subscriptions <span style="color:#8792a2; font-size:12px;">array</span> | List of user's current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
-age <span style="color:#8792a2; font-size:12px;">integer</span> | User's age in years. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
-zip <span style="color:#8792a2; font-size:12px;">integer</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+age <span style="color:#8792a2; font-size:12px;">integer</span> | User's age in years. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+zip <span style="color:#8792a2; font-size:12px;">integer</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -298,9 +302,24 @@ Don't forget your authentication key
 
 ![alt text](https://i.imgur.com/B2AQGK1.png "Recommendations")
 
+# Transactions
+<small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
+<br>
+<br>
+Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.
+
+Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
+
+1. Management of current subscriptions
+2. Discovery of new, recommended services
+
+Facilitating the actual transaction is the natural next step.
+
+We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.
+
 # Merchants
 
-## Upload a SKU
+## Upload or Update a SKU
 
 ```shell
 curl -X POST https://api.lifespan.co/merchants
@@ -351,11 +370,13 @@ curl -X POST https://api.lifespan.co/merchants
    }
 ```
 
-This endpoint takes in attributes of a subscription service. It returns an object with a 200 status code if the call succeeded.
+This endpoint takes in attributes of a subscription service to upload (POST) or update (PUT). It returns an object with a 200 status code if the call succeeded.
 
 ### HTTP Request
 
 `POST https://api.lifespan.co/merchants`
+
+`PUT https://api.lifespan.co/merchants`
 
 ### Payload
 
@@ -371,18 +392,3 @@ offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of o
 <aside class="success">
 Don't forget your authentication key
 </aside>
-
-# Transactions
-<small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
-<br>
-<br>
-Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.
-
-Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
-
-1. Management of current subscriptions
-2. Discovery of new, recommended services
-
-Facilitating the actual transaction is the natural next step.
-
-We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.
