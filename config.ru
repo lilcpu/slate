@@ -3,7 +3,7 @@
 #     :root => 'build',
 #     :index => 'index.html'
 
-use Rack::Static, :urls => {"/" => 'index.html'}, :root => 'build'
+use Rack::Static, :urls => {"/" => 'index.html'}, :root => './build'
 
 
 run lambda { |env|
