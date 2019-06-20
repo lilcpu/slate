@@ -171,8 +171,8 @@ curl -d '{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}'
 
 ```json
 {
-  "status": "initiated",
-  "id": 1234
+  "id": 1234,
+  "status": "initiated"
 }
 ```
 
@@ -206,12 +206,14 @@ curl "https://api.lifespan.co/cancellations/1234"
 
 ```json
 {
-  "status": "completed",
-  "id": 1234
+  "id": 1234,
+  "merchantName": "Spotify",
+  "userEmail": "thanos@lifespan.co",
+  "status": "completed"
 }
 ```
 
-This endpoint returns the status of a given cancellation id.
+This endpoint returns the details of a given cancellation id.
 
 ### HTTP Request
 
