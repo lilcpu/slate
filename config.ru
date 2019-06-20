@@ -1,8 +1,7 @@
 use Rack::Static,
-    :urls => ['/build'],
+    :urls => ['/build', '/stylesheets'],
     :root => 'build',
-    :index => 'index.html'
-
+    :index => 'index.html',
 
 run lambda { |env|
   [
