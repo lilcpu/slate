@@ -304,7 +304,7 @@ Don't forget your authentication key
 
 # Merchants
 
-## Upload a SKU
+## Upload or Update a SKU
 
 ```shell
 curl -X POST https://api.lifespan.co/merchants
@@ -355,11 +355,13 @@ curl -X POST https://api.lifespan.co/merchants
    }
 ```
 
-This endpoint takes in attributes of a subscription service. It returns an object with a 200 status code if the call succeeded.
+This endpoint takes in attributes of a subscription service to upload (POST) or update (PUT). It returns an object with a 200 status code if the call succeeded.
 
 ### HTTP Request
 
 `POST https://api.lifespan.co/merchants`
+
+`PUT https://api.lifespan.co/merchants`
 
 ### Payload
 
