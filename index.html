@@ -6,7 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
-
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -222,24 +222,41 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#security-amp-privacy" class="toc-h1 toc-link" data-title="Security &amp; Privacy">Security &amp; Privacy</a>
           </li>
           <li>
-            <a href="#memberships" class="toc-h1 toc-link" data-title="Memberships">Memberships</a>
+            <a href="#api-access" class="toc-h1 toc-link" data-title="API Access">API Access</a>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+          <li>
+            <a href="#building-user-experience" class="toc-h1 toc-link" data-title="Building User Experience">Building User Experience</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-memberships-in-the-lifespan-directory" class="toc-h2 toc-link" data-title="Get All Memberships in the Lifespan Directory">Get All Memberships in the Lifespan Directory</a>
+                    <a href="#displaying-recurring-payments-cancellation-buttons-and-recommendations" class="toc-h2 toc-link" data-title="Displaying Recurring Payments, Cancellation Buttons, and Recommendations">Displaying Recurring Payments, Cancellation Buttons, and Recommendations</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-membership" class="toc-h2 toc-link" data-title="Get a Specific Membership">Get a Specific Membership</a>
+                    <a href="#displaying-the-cancellation-modal" class="toc-h2 toc-link" data-title="Displaying the Cancellation Modal">Displaying the Cancellation Modal</a>
                   </li>
                   <li>
-                    <a href="#get-all-categories" class="toc-h2 toc-link" data-title="Get All Categories">Get All Categories</a>
+                    <a href="#visualizing-monthly-payments" class="toc-h2 toc-link" data-title="Visualizing Monthly Payments">Visualizing Monthly Payments</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#cancellation" class="toc-h1 toc-link" data-title="Cancellation">Cancellation</a>
+            <a href="#financial-wellness" class="toc-h1 toc-link" data-title="Financial Wellness">Financial Wellness</a>
+          </li>
+          <li>
+            <a href="#recurring-payments" class="toc-h1 toc-link" data-title="Recurring Payments">Recurring Payments</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-recurring-payments-from-a-transaction-history" class="toc-h2 toc-link" data-title="Get All Recurring Payments from a Transaction History">Get All Recurring Payments from a Transaction History</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#cancellations" class="toc-h1 toc-link" data-title="Cancellations">Cancellations</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#cancel-a-subscription" class="toc-h2 toc-link" data-title="Cancel a Subscription">Cancel a Subscription</a>
@@ -250,373 +267,74 @@
               </ul>
           </li>
           <li>
-            <a href="#recurring-services" class="toc-h1 toc-link" data-title="Recurring Services">Recurring Services</a>
+            <a href="#commerce" class="toc-h1 toc-link" data-title="Commerce">Commerce</a>
+          </li>
+          <li>
+            <a href="#recommendations" class="toc-h1 toc-link" data-title="Recommendations">Recommendations</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-recurring-services-in-a-transaction-history" class="toc-h2 toc-link" data-title="Get All Recurring Services in a Transaction History">Get All Recurring Services in a Transaction History</a>
+                    <a href="#get-recommended-services-for-a-user" class="toc-h2 toc-link" data-title="Get Recommended Services for a User">Get Recommended Services for a User</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#merchants" class="toc-h1 toc-link" data-title="Merchants">Merchants</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#upload-a-sku" class="toc-h2 toc-link" data-title="Upload a SKU">Upload a SKU</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
           </li>
       </ul>
-        <ul class="toc-footer">
-            <li><a href='#'>Request a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Lifespan API! You can use our API to access Lifespan API endpoints, which can get information on various subscription services, categories, and tools to analyze transaction statements to identify or recommend services to your users.</p>
-<h1 id='authentication'>Authentication</h1><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: {token}"</span>
+<p><span style="color:#32325D; font-size:25px; font-weight: 400; line-height: 40px;">Lifespan offers APIs for <span style="color:#08B7B7; font-weight: 600">driving financial wellness</span> and <span style="color:#08B7B7; font-weight: 600">expanding cards on file</span> in the exploding Subscription Economy.</span></p>
+
+<p>Lifespan is an end-to-end API for subscription management, discovery, and transactions. It&#39;s infrastructure that enables your cardholders to view, cancel, and add new subscription services frictionlessly within your web and mobile apps. You can integrate any feature individually or all together as a bundle.</p>
+
+<p>The Lifespan API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. You can use the Lifespan API in test mode, which does not affect live data.</p>
+
+<p><img src="https://i.imgur.com/oRas4vj.png" title="Lifespan Layers" alt="alt text" /></p>
+<h1 id='security-amp-privacy'>Security &amp; Privacy</h1>
+<p>Security is priority number one at Lifespan. Our data footprint is kept to an absolute minimum. Sensitive data is never stored on Lifespan servers. We require explicit user opt-in anytime we need their data to perform a task. None of our APIs require data tied to a human identity; thus, data within Lifespan systems is always anonymized.</p>
+
+<p>To protect data in transit, all communications between you and Lifespan are encrypted via SSL using 2048-bit certificates. We use <a href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security" target="_blank">HSTS</a> to ensure requests interact with Lifespan only over HTTPS. At rest, all of the anonymous data is encrypted with AES-256.</p>
+
+<p>We use the standard OAuth 2.0 protocol for authentication and authorization. See <a href="#api-access">API Access</a> below for instructions to get keys.</p>
+<h1 id='api-access'>API Access</h1><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/oauth/token"</span>
+  -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span>
+  -d <span class="s2">"grant_type=client_credentials&amp;client_id={YOUR_CLIENT_ID}&amp;client_secret={YOUR_CLIENT_SECRET}"</span>
 </code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w">
+</span><span class="err">Content-Type</span><span class="p">:</span><span class="w"> </span><span class="err">application/json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJz93a...k4laUWw"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">86400</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/" target="_blank">OAuth 2.0 client credentials grant flow.</a> There are a few steps to get set up with keys:</p>
+
+<ol>
+<li>Send us an email at <strong>api@lifespan.co</strong> to request credentials for your organization.</li>
+<li>We&#39;ll send you a <code>client_id</code> and a <code>client_secret</code>. <strong>Save these somewhere secure.</strong></li>
+<li>Request an <code>access_token</code> (see example).</li>
+</ol>
+
+<p>After you recieve an <code>access_token</code> you <strong>must</strong> include it in the authorization header of each request to the Lifespan API like so: 
+<code>Authorization: Bearer {token}</code></p>
+
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
-</aside>
-<h1 id='memberships'>Memberships</h1><h2 id='get-all-memberships-in-the-lifespan-directory'>Get All Memberships in the Lifespan Directory</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/memberships"</span>
-  -H <span class="s2">"Authorization: {token}"</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="s2">"memberships"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">  
-   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Aaptiv"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"motto"</span><span class="p">:</span><span class="s2">"Workout with an audio-based personal trainer"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Aaptiv has popularized the audio-based workout. Expert trainers are in your ear guiding you as you exercise, providing techniques, tips, and encouragement. You’ll also hear fresh music hits and classic tracks paced to your workout. It can help you add structure to your gym sessions and make them more productive than ever."</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"https://aaptiv.com/"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"service_medium"</span><span class="p">:</span><span class="s2">"digital"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"offers_trial"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"info"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">""</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"how_it_works"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">"Enter your goals to find personalized programs and workouts"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Choose a workout based on duration, trainer, music, and more"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Put on your headphones and Aaptiv's trainers will guide your workout"</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"brand_color_code"</span><span class="p">:</span><span class="s2">"#0019FF"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"regions"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"plans"</span><span class="p">:[</span><span class="w">  
-      </span><span class="p">{</span><span class="w">  
-         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Monthly"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">14.99</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
-            </span><span class="s2">"No free trial option"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Automatically renews every month"</span><span class="w">
-         </span><span class="p">],</span><span class="w">
-         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"month"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">  
-         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">99.99</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
-            </span><span class="s2">"Includes a free 7-day trial"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"45% savings compared to monthly"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Automatically renews every year"</span><span class="w">
-         </span><span class="p">],</span><span class="w">
-         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"annual"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"offers"</span><span class="p">:[</span><span class="w">  
-      </span><span class="p">{</span><span class="w">  
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"free"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"duration"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"for_plan"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"7 days free"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Fitness"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Fitness"</span><span class="w">
-   </span><span class="p">]</span><span class="w">
-</span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-  </span><span class="err">....</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all memberships.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://api.lifespan.co/memberships</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>service_medium</td>
-<td>na</td>
-<td>Either &#39;physical&#39; or &#39;digital&#39; returns memberships of said medium</td>
-</tr>
-<tr>
-<td>offers_trial</td>
-<td>na</td>
-<td>Either true or false. If true, filters memberships with a trial offer</td>
-</tr>
-<tr>
-<td>region</td>
-<td>na</td>
-<td>Ex: &#39;United States&#39;</td>
-</tr>
-<tr>
-<td>summary</td>
-<td>false</td>
-<td>If true the memberships will be sent with only id, motto, description and name</td>
-</tr>
-<tr>
-<td>categories</td>
-<td>all</td>
-<td>If a selection of categories is given, results will be filtered accordingly. Comma seperated.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
-<h2 id='get-a-specific-membership'>Get a Specific Membership</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/memberships/1"</span>
-  -H <span class="s2">"Authorization: {token}"</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">  
-   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Aaptiv"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"motto"</span><span class="p">:</span><span class="s2">"Workout with an audio-based personal trainer"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Aaptiv has popularized the audio-based workout. Expert trainers are in your ear guiding you as you exercise, providing techniques, tips, and encouragement. You’ll also hear fresh music hits and classic tracks paced to your workout. It can help you add structure to your gym sessions and make them more productive than ever."</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"https://aaptiv.com/"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"pending"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"service_medium"</span><span class="p">:</span><span class="s2">"digital"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"offers_trial"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"info"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">""</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"how_it_works"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">"Enter your goals to find personalized programs and workouts"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Choose a workout based on duration, trainer, music, and more"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Put on your headphones and Aaptiv's trainers will guide your workout"</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"brand_color_code"</span><span class="p">:</span><span class="s2">"#0019FF"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"regions"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Canada"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"UK"</span><span class="p">,</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"plans"</span><span class="p">:[</span><span class="w">  
-      </span><span class="p">{</span><span class="w">  
-         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Monthly"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">14.99</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
-            </span><span class="s2">"No free trial option"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Automatically renews every month"</span><span class="w">
-         </span><span class="p">],</span><span class="w">
-         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"month"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">  
-         </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"price"</span><span class="p">:</span><span class="mf">99.99</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"currency"</span><span class="p">:</span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"includes"</span><span class="p">:[</span><span class="w">  
-            </span><span class="s2">"Includes a free 7-day trial"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"45% savings compared to monthly"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"Automatically renews every year"</span><span class="w">
-         </span><span class="p">],</span><span class="w">
-         </span><span class="s2">"interval"</span><span class="p">:</span><span class="s2">"annual"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">""</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"offers"</span><span class="p">:[</span><span class="w">  
-      </span><span class="p">{</span><span class="w">  
-         </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"free"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"duration"</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"for_plan"</span><span class="p">:</span><span class="s2">"Yearly"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"7 days free"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">  
-      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Fitness"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Health &amp; Wellness"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Fitness"</span><span class="w">
-   </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific membership.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET https://api.lifespan.co/memberships/&lt;Name&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Name</td>
-<td>The Name of the membership to retrieve</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
-<h2 id='get-all-categories'>Get All Categories</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/categories"</span>
-  -H <span class="s2">"Authorization: {token}"</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Fitness"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Beauty"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a list of all categories.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>GET https://api.lifespan.co/categories</code></p>
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
-<h1 id='cancellation'>Cancellation</h1><h2 id='cancel-a-subscription'>Cancel a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}'</span> 
-    -H <span class="s2">"Content-Type: application/json"</span>
-    -H <span class="s2">"Authorization: {token}"</span> 
-    -X POST https://api.lifespan.co/cancellations
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint takes in a merchant name and the email of the user that would like to cancel their subscription. This email <strong>must</strong> be the email in use at the service in question. The cancellation will be initiated and that user will recieve email updates on the cencellation status as it progresses. Usually no more than 24 hours.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
-<p><code>POST https://api.lifespan.co/cancellations</code></p>
-<h3 id='payload'>Payload</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>merchantName</td>
-<td>the name of the merchant you wish to cancel a subscription with</td>
-</tr>
-<tr>
-<td>userEmail</td>
-<td>the email of the user who is cancelling their subscription (<strong>must</strong> be the email on the account being cancelled with the merchant)</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
-<h2 id='get-the-details-of-a-specific-cancellation'>Get the Details of a Specific Cancellation</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/cancellations/1234"</span>
-  -H <span class="s2">"Authorization: {token}"</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint returns the status of a given cancellation id.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET https://api.lifespan.co/cancellations/&lt;id&gt;</code></p>
-<h3 id='payload-2'>Payload</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>the id of the cancellation. This is included in the response to a request to <code>/cancellations</code>.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
-<h1 id='recurring-services'>Recurring Services</h1><h2 id='get-all-recurring-services-in-a-transaction-history'>Get All Recurring Services in a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{"transactions":"&lt;transactionHistoryJSONString&gt;"}'</span> 
-    -H <span class="s2">"Content-Type: application/json"</span>
-    -H <span class="s2">"Authorization: {token}"</span> 
-    -X POST https://api.lifespan.co/services
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"services"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"RgyPLBjx0qiJ1y5zB0gkc8P3qgE5dPIymdrYB"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1299</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint returns a list of all recurring services found in a given transaction history. They are organized by accountId which is a plaid construct to securley mask sensitive details of an account. The <code>price</code> field of the returned services is always in cents.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST https://api.lifespan.co/services</code></p>
-<h3 id='payload-3'>Payload</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>transactions</td>
-<td>a json string containing an array of transactions from plaid. See the <a href="https://plaid.com/docs/#transactions">plaid docs</a> for info on obtaining transactions.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Don't forget your authentication key
 </aside>
 <h1 id='errors'>Errors</h1>
 <p>The Lifespan API uses the following error codes:</p>
@@ -656,6 +374,326 @@ Don't forget your authentication key
 <td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
+<h1 id='building-user-experience'>Building User Experience</h1>
+<p>You will build a consumer-facing user experience directly into your web or mobile application. Below are a few suggestions and examples of how you might build your front-end components and the flows that connect them, but ultimately the choice is yours as for how to best present data and functionality to users.</p>
+<h2 id='displaying-recurring-payments-cancellation-buttons-and-recommendations'>Displaying Recurring Payments, Cancellation Buttons, and Recommendations</h2>
+<p>Display the results of a call to the <a href="#recurring-services">Recurring Payments API</a> in a list. If you&#39;re using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you&#39;re using the <a href="#recomendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user&#39;s current recurring payments.</p>
+
+<p><img src="https://i.imgur.com/XvHUjmi.png" title="Displaying Recurring Payments and Recommendations Modules" alt="alt text" /></p>
+<h2 id='displaying-the-cancellation-modal'>Displaying the Cancellation Modal</h2>
+<p>Upon clicking or tapping a cancellation button, render a popup modal prompting the user for their email associated with the given service. The modal should appear over the list of recurring services.</p>
+
+<p><img src="https://i.imgur.com/XAB4vD7.png" title="Cancellation Modal" alt="alt text" /></p>
+<h2 id='visualizing-monthly-payments'>Visualizing Monthly Payments</h2>
+<p>Donut charts are a great way to visualize monthly data. Show the total monthly spend in the center. Users should be able to hover over or click each section of your chart to view full details. Consider including a legend for added clarity.</p>
+
+<p><img src="https://i.imgur.com/n8FUqnI.png" title="Pie chart breakdown of a user's monthly spend" alt="alt text" /></p>
+<h1 id='financial-wellness'>Financial Wellness</h1>
+<p>Lifespan offers two APIs that enable cardholders to view and cancel recurring payments.</p>
+
+<p>The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user&#39;s recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
+
+<p>The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Recurring Payments API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
+<h1 id='recurring-payments'>Recurring Payments</h1><h2 id='get-all-recurring-payments-from-a-transaction-history'>Get All Recurring Payments from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+    "transactions":[ 
+      {
+        "amount":"12.99",
+        "name":"spotify",
+        "date":"01/02/2019"
+      },
+      {
+        "amount":"15.99",
+        "name":"netflix",
+        "date":"01/02/2019"
+      },
+      ...
+    ]}'</span> 
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -H <span class="s2">"Authorization: {token}"</span> 
+    -X POST https://api.lifespan.co/services
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"services"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1299</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1599</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <code>name</code> and the <code>price</code> of the service. The <code>price</code> field of the returned services is always in cents.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://api.lifespan.co/services</code></p>
+<h3 id='payload'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>transactions <span style="color:#8792a2; font-size:12px;">array</span></td>
+<td>A JSON-stringified array of transactions. <strong>Must include amount, date and name fields</strong> <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+<h1 id='cancellations'>Cancellations</h1><h2 id='cancel-a-subscription'>Cancel a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}'</span> 
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -H <span class="s2">"Authorization: {token}"</span> 
+    -X POST https://api.lifespan.co/cancellations
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint takes in a merchant name and the email of the user that would like to cancel their subscription. This email <strong>must</strong> be the email in use at the service in question. The cancellation will be initiated and that user will receive email updates on the cancellation status as it progresses. Usually no more than 24 hours.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.lifespan.co/cancellations</code></p>
+<h3 id='payload-2'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>merchantName <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The name of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>userEmail <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The email address of the user that would like to cancel the subscription. This email must be the one associated with the user&#39;s account with the merchant. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
+<p><img src="https://i.imgur.com/FFuV3Rp.png" title="Cancellations" alt="alt text" /></p>
+<h2 id='get-the-details-of-a-specific-cancellation'>Get the Details of a Specific Cancellation</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/cancellations/1234"</span>
+  -H <span class="s2">"Authorization: {token}"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns the status of a given cancellation id.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.lifespan.co/cancellations/&lt;id&gt;</code></p>
+<h3 id='payload-3'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>The ID of the cancellation. This is provided in the response to a POST request to <span style="color:#cd3d64;"><code>/cancellations</code></span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+<h1 id='commerce'>Commerce</h1>
+<p>Giving cardholders the ability to track and cancel recurring payments not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy continues to grow (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">data</a>), use our APIs to actively drive increasing and reliable interchange revenue.</p>
+<h1 id='recommendations'>Recommendations</h1><h2 id='get-recommended-services-for-a-user'>Get Recommended Services for a User</h2><pre class="highlight shell tab-shell"><code>curl -X GET https://api.lifespan.co/recommendations
+    -H <span class="s2">"Authorization: {token}"</span>
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -d <span class="s1">'{
+         "subscriptions": [
+            "Hulu",
+            "Amazon Prime",
+            "Ipsy",
+            "Lola",
+            "Barkbox"
+         ],
+         "gender": "Female",
+         "age": 30,
+         "zip": 94539
+       }'</span> 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recommendations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York Times"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30% off first 3 months"</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Postmates Unlimited"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3 months free"</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rent the Runway"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$80 off first 2 months"</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Farmer's Dog"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20% off first month"</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birchbox"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20% off first 3 months"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint takes in a user&#39;s current subscriptions, gender, age, and zip code. The response is an array of objects consisting of the name of each recommended service and its corresponding offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.lifespan.co/recommendations</code></p>
+<h3 id='payload-4'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subscriptions <span style="color:#8792a2; font-size:12px;">array</span></td>
+<td>List of user&#39;s current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>gender <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>User&#39;s gender. Value can either be <span style="color:#cd3d64;"><code>Male</code></span> or <span style="color:#cd3d64;"><code>Female</code></span>. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span></td>
+</tr>
+<tr>
+<td>age <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>User&#39;s age in years. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span></td>
+</tr>
+<tr>
+<td>zip <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>Zip code of user&#39;s residence. Must be a valid United States code. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
+<p><img src="https://i.imgur.com/B2AQGK1.png" title="Recommendations" alt="alt text" /></p>
+<h1 id='merchants'>Merchants</h1><h2 id='upload-a-sku'>Upload a SKU</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/merchants
+    -H <span class="s2">"Authorization: {token}"</span>
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -d <span class="s1">'{
+         "name": "YouTubeTV",
+         "website": "https://tv.youtube.com"
+         "logo": "https://tv.youtube.com/logo",
+         "gender": "All",
+         "plans": [
+            {
+               "name": "Standard",
+               "price": 40.00,
+               "interval": "month",
+               "includes": [
+                  "DVR with unlimited storage",
+                  "Local and national live sports",
+                  "6 accounts per household",
+                  "3 simultaneous streams"
+               ],
+               "regions": ["United States"]
+            }
+         ],
+         "offers": [
+            {
+               "description": "7 days free",
+               "qualifiers": null
+            },
+            {
+               "description": "1 month free",
+               "qualifiers": ["HBO Now", "Hulu", "Netflix"]
+            },
+            {
+               "description": "2 months free",
+               "qualifiers": ["SlingTV", "DirectTV", "DishTV"]
+            }
+         ]
+       }'</span> 
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">   </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SKU successfully uploaded"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint takes in attributes of a subscription service. It returns an object with a 200 status code if the call succeeded.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://api.lifespan.co/merchants</code></p>
+<h3 id='payload-5'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>Name of subscription service. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>website <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>Website URL. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>logo <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>URL to hosted logo. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span></td>
+</tr>
+<tr>
+<td>gender <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The gender of the service&#39;s target demographic. Values can be either <span style="color:#cd3d64;"><code>Male</code></span>, <span style="color:#cd3d64;"><code>Female</code></span>, or <span style="color:#cd3d64;"><code>All</code></span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>plans <span style="color:#8792a2; font-size:12px;">array</span></td>
+<td>An array of objects, with each object representing a plan. The plan object contains the following required information: the <span style="color:#cd3d64;"><code>name</code></span> <span style="color:#8792a2; font-size:12px;">(string)</span> of the service, its <span style="color:#cd3d64;"><code>price</code></span> <span style="color:#8792a2; font-size:12px;">(integer)</span> in USD, the billing <span style="color:#cd3d64;"><code>interval</code></span> <span style="color:#8792a2; font-size:12px;">(string)</span>, a list of benefits and/or features the service <span style="color:#cd3d64;"><code>includes</code></span> <span style="color:#8792a2; font-size:12px;">(array)</span> and a list of U.S. <span style="color:#cd3d64;"><code>regions</code></span><span style="color:#8792a2; font-size:12px;">(array)</span> - cities or states - that the plan is available in. Send <span style="color:#cd3d64;"><code>&quot;regions&quot;: [&quot;United States&quot;]</code></span> if nationwide or <span style="color:#cd3d64;"><code>[&quot;Continental United States&quot;]</code></span> if available everywhere but Alaska and Hawaii. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span></td>
+</tr>
+<tr>
+<td>offers <span style="color:#8792a2; font-size:12px;">array</span></td>
+<td>An array of objects, with each object representing an offer. The offer object contains 1. a <span style="color:#cd3d64;"><code>description</code></span> <span style="color:#8792a2; font-size:12px;">(string)</span> of the offer. 2. A list of <span style="color:#cd3d64;"><code>qualifiers</code></span> <span style="color:#8792a2; font-size:12px;">(array)</span>. Qualifiers are subscriptions a target user may be engaged with currently which indicate interest in your category or engagement with competing services; thus <strong>qualifying</strong> them for a specific offer. If the offer is available to anyone regardless of their current subscriptions, send <span style="color:#cd3d64;"><code>&quot;qualifiers&quot;: null</code></span> (the default value). <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required<span></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+<h1 id='transactions'>Transactions</h1>
+<p><small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
+<br>
+<br>
+Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.</p>
+
+<p>Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:</p>
+
+<ol>
+<li>Management of current subscriptions</li>
+<li>Discovery of new, recommended services</li>
+</ol>
+
+<p>Facilitating the actual transaction is the natural next step.</p>
+
+<p>We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.</p>
 
       </div>
       <div class="dark-box">
