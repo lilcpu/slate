@@ -140,7 +140,7 @@ curl -d '{
 }
 ```
 
-This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant `name` and the `price` of the service. The `price` field of the returned services is always in cents.
+This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
 
 ### HTTP Request
 
