@@ -1,1 +1,1 @@
-web: bundle exec puma -p process.env.PORT
+web: bundle exec puma -p $PORT
