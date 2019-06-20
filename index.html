@@ -396,12 +396,12 @@ You must replace <code>token</code> with your personal API key.
 <h1 id='recurring-payments'>Recurring Payments</h1><h2 id='get-all-recurring-payments-from-a-transaction-history'>Get All Recurring Payments from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "transactions":[ 
       {
-        "amount":"12.99",
+        "amount":12.99,
         "name":"spotify",
         "date":"2019-05-16"
       },
       {
-        "amount":"15.99",
+        "amount":15.99,
         "name":"netflix",
         "date":"2019-05-16"
       },
@@ -427,7 +427,7 @@ You must replace <code>token</code> with your personal API key.
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
+<p>This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/services</code></p>
 <h3 id='payload'>Payload</h3>
