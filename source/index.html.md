@@ -107,12 +107,12 @@ The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem wit
 curl -d '{
     "transactions":[ 
       {
-        "amount":"12.99",
+        "amount":12.99,
         "name":"spotify",
         "date":"2019-05-16"
       },
       {
-        "amount":"15.99",
+        "amount":15.99,
         "name":"netflix",
         "date":"2019-05-16"
       },
@@ -140,7 +140,7 @@ curl -d '{
 }
 ```
 
-This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
+This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. Use negative <span style="color:#cd3d64;">`amount`</span> values for account credits and positive values for charges. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
 
 ### HTTP Request
 
