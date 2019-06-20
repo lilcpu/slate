@@ -281,7 +281,7 @@
             <a href="#merchants" class="toc-h1 toc-link" data-title="Merchants">Merchants</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#upload-a-sku" class="toc-h2 toc-link" data-title="Upload a SKU">Upload a SKU</a>
+                    <a href="#upload-or-update-a-sku" class="toc-h2 toc-link" data-title="Upload or Update a SKU">Upload or Update a SKU</a>
                   </li>
               </ul>
           </li>
@@ -592,7 +592,7 @@ Don't forget your authentication key
 </aside>
 
 <p><img src="https://i.imgur.com/B2AQGK1.png" title="Recommendations" alt="alt text" /></p>
-<h1 id='merchants'>Merchants</h1><h2 id='upload-a-sku'>Upload a SKU</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/merchants
+<h1 id='merchants'>Merchants</h1><h2 id='upload-or-update-a-sku'>Upload or Update a SKU</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/merchants
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
     -d <span class="s1">'{
@@ -638,9 +638,11 @@ Don't forget your authentication key
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SKU successfully uploaded"</span><span class="w">
    </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in attributes of a subscription service. It returns an object with a 200 status code if the call succeeded.</p>
+<p>This endpoint takes in attributes of a subscription service to upload (POST) or update (PUT). It returns an object with a 200 status code if the call succeeded.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/merchants</code></p>
+
+<p><code>PUT https://api.lifespan.co/merchants</code></p>
 <h3 id='payload-5'>Payload</h3>
 <table><thead>
 <tr>
