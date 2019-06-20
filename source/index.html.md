@@ -236,7 +236,7 @@ Giving cardholders the ability to track and cancel recurring payments not only e
 ## Get Recommended Services for a User
 
 ```shell
-curl -X GET https://api.lifespan.co/recommendations
+curl -X POST https://api.lifespan.co/recommendations
     -H "Authorization: {token}"
     -H "Content-Type: application/json"
     -d '{
@@ -285,22 +285,37 @@ This endpoint takes in a user's current subscriptions, gender, age, and zip code
 
 ### HTTP Request
 
-`GET https://api.lifespan.co/recommendations`
+`POST https://api.lifespan.co/recommendations`
 
 ### Payload
 
 Parameter | Description
 --------- | -----------
 subscriptions <span style="color:#8792a2; font-size:12px;">array</span> | List of user's current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
-age <span style="color:#8792a2; font-size:12px;">integer</span> | User's age in years. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
-zip <span style="color:#8792a2; font-size:12px;">integer</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#8792a2; font-size:12px; font-weight: 500;">optional</span>
+gender <span style="color:#8792a2; font-size:12px;">string</span> | User's gender. Value can either be <span style="color:#cd3d64;">`Male`</span> or <span style="color:#cd3d64;">`Female`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+age <span style="color:#8792a2; font-size:12px;">integer</span> | User's age in years. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+zip <span style="color:#8792a2; font-size:12px;">integer</span> | Zip code of user's residence. Must be a valid United States code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
 </aside>
 
 ![alt text](https://i.imgur.com/B2AQGK1.png "Recommendations")
+
+# Transactions
+<small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
+<br>
+<br>
+Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.
+
+Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
+
+1. Management of current subscriptions
+2. Discovery of new, recommended services
+
+Facilitating the actual transaction is the natural next step.
+
+We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.
 
 # Merchants
 
@@ -377,18 +392,3 @@ offers <span style="color:#8792a2; font-size:12px;">array</span> | An array of o
 <aside class="success">
 Don't forget your authentication key
 </aside>
-
-# Transactions
-<small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
-<br>
-<br>
-Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.
-
-Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
-
-1. Management of current subscriptions
-2. Discovery of new, recommended services
-
-Facilitating the actual transaction is the natural next step.
-
-We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.
