@@ -49,8 +49,7 @@ The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/ac
 2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure.__
 3. Request an `access_token` (see example).
 
-After you recieve an `access_token` you __must__ include it in the authorization header of each request to the Lifespan API like so: 
-`Authorization: Bearer {token}`
+After you recieve an `access_token` store it in your database for future use. When making requests to the Lifespan API you __must__ include the token in the authorization header like so: `Authorization: Bearer {token}`
 
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
@@ -230,7 +229,7 @@ Don't forget your authentication key
 
 # Commerce
 
-Giving cardholders the ability to track and cancel recurring payments not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy continues to grow (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">data</a>), use our APIs to actively drive increasing and reliable interchange revenue.
+Giving cardholders the ability to track and cancel recurring payments not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy <a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">continues to grow </a>, use our APIs to actively drive increasing and reliable interchange revenue.
 
 # Recommendations
 
