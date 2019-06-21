@@ -76,7 +76,7 @@ You will build a consumer-facing user experience directly into your web or mobil
 
 ## Displaying Recurring Payments, Cancellation Buttons, and Recommendations
 
-Display the results of a call to the <a href="#recurring-services">Recurring Payments API</a> in a list. If you're using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you're using the <a href="#recomendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user's current recurring payments.
+Display the results of a call to the <a href="#recurring-payments">Recurring Payments API</a> in a list. If you're using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you're using the <a href="#recommendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user's current recurring payments.
 
 ![alt text](https://i.imgur.com/XvHUjmi.png "Displaying Recurring Payments and Recommendations Modules")
 
