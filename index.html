@@ -253,13 +253,16 @@
                   <li>
                     <a href="#get-all-recurring-payments-from-a-transaction-history" class="toc-h2 toc-link" data-title="Get All Recurring Payments from a Transaction History">Get All Recurring Payments from a Transaction History</a>
                   </li>
+                  <li>
+                    <a href="#get-new-recurring-payments-from-a-transaction-history-of-an-existing-user" class="toc-h2 toc-link" data-title="Get New Recurring Payments from a Transaction History of an Existing User">Get New Recurring Payments from a Transaction History of an Existing User</a>
+                  </li>
               </ul>
           </li>
           <li>
             <a href="#cancellations" class="toc-h1 toc-link" data-title="Cancellations">Cancellations</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#cancel-a-subscription" class="toc-h2 toc-link" data-title="Cancel a Subscription">Cancel a Subscription</a>
+                    <a href="#get-cancelleation-information-for-a-subscription" class="toc-h2 toc-link" data-title="Get Cancelleation Information For a Subscription">Get Cancelleation Information For a Subscription</a>
                   </li>
                   <li>
                     <a href="#get-the-details-of-a-specific-cancellation" class="toc-h2 toc-link" data-title="Get the Details of a Specific Cancellation">Get the Details of a Specific Cancellation</a>
@@ -415,6 +418,7 @@ You must replace <code>token</code> with your personal API key.
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"requestId"</span><span class="p">:</span><span class="mi">1234</span><span class="p">,</span><span class="w">
   </span><span class="s2">"services"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
@@ -427,7 +431,7 @@ You must replace <code>token</code> with your personal API key.
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
+<p>This endpoint returns a <span style="color:#cd3d64;"><code>requestId</code></span> and a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/services</code></p>
 <h3 id='payload'>Payload</h3>
@@ -446,7 +450,72 @@ You must replace <code>token</code> with your personal API key.
 <aside class="success">
 Don't forget your authentication key
 </aside>
-<h1 id='cancellations'>Cancellations</h1><h2 id='cancel-a-subscription'>Cancel a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}'</span> 
+<h2 id='get-new-recurring-payments-from-a-transaction-history-of-an-existing-user'>Get New Recurring Payments from a Transaction History of an Existing User</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+    "requestId": 1234,
+    "transactions":[ 
+      {
+        "amount":12.99,
+        "name":"spotify",
+        "date":"2019-05-16"
+      },
+      {
+        "amount":15.99,
+        "name":"netflix",
+        "date":"2019-05-16"
+      },
+      ...
+    ]}'</span> 
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -H <span class="s2">"Authorization: {token}"</span> 
+    -X POST https://api.lifespan.co/services/updates
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"services"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HBO"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1499</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hulu"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1299</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns a list of all <em>new</em> recurring payments found in a <em>new</em> transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodicaly (preferrably monthly) in order to stay up to date with your user&#39;s new subscription enrollments. </p>
+
+<p>Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://api.lifespan.co/services/updates</code></p>
+<h3 id='payload-2'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>requestId <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>the <code>requestId</code> returned by the inital call to <code>/services</code> for this user <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>transactions <span style="color:#8792a2; font-size:12px;">array</span></td>
+<td>A JSON-stringified array of transactions. <strong>Must include amount, date and name fields</strong> <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+<h1 id='cancellations'>Cancellations</h1><h2 id='get-cancelleation-information-for-a-subscription'>Get Cancelleation Information For a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+    "merchantName":"Spotify", 
+    "merchantState":"NY", 
+    "merchantCity":"New York",
+    "merchantZip":"90028",
+    "userEmail": "thanos@lifespan.co"}'</span> 
     -H <span class="s2">"Content-Type: application/json"</span>
     -H <span class="s2">"Authorization: {token}"</span> 
     -X POST https://api.lifespan.co/cancellations
@@ -459,10 +528,10 @@ Don't forget your authentication key
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in a merchant name and the email of the user that would like to cancel their subscription. This email <strong>must</strong> be the email in use at the service in question. The cancellation will be initiated and that user will receive email updates on the cancellation status as it progresses. Usually no more than 24 hours.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<p>This endpoint takes in a merchant name, merchant address info, and the email of the user that would like to cancel their subscription. This email <strong>must</strong> be the email in use at the service in question. Lifespan will identify and return instructions for the cancellation process of the given merchant. This process usually takes no more than 24 hours and in some cases lifespan can return this information instantly. See the example response of <span style="color:#cd3d64;"><code>/cancellations/id</code></span> for an example of the payload returned for a completed cancellation info request.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/cancellations</code></p>
-<h3 id='payload-2'>Payload</h3>
+<h3 id='payload-3'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -472,6 +541,18 @@ Don't forget your authentication key
 <tr>
 <td>merchantName <span style="color:#8792a2; font-size:12px;">string</span></td>
 <td>The name of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>merchantState <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The state of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>merchantCity <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The city of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>merchantZip <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The zip code of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
 </tr>
 <tr>
 <td>userEmail <span style="color:#8792a2; font-size:12px;">string</span></td>
@@ -493,14 +574,19 @@ Don't forget your authentication key
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
   </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantState"</span><span class="p">:</span><span class="s2">"NY"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"merchantCity"</span><span class="p">:</span><span class="s2">"New York"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantZip"</span><span class="p">:</span><span class="s2">"90028"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"userEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thanos@lifespan.co"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contactDetails"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint returns the details of a given cancellation id.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET https://api.lifespan.co/cancellations/&lt;id&gt;</code></p>
-<h3 id='payload-3'>Payload</h3>
+<h3 id='payload-4'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -541,30 +627,35 @@ Don't forget your authentication key
   </span><span class="s2">"recommendations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
      </span><span class="p">{</span><span class="w">
          </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York Times"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30% off first 3 months"</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"30% off first 3 months"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offerUrl"</span><span class="p">:</span><span class="s2">"https://nyt.com/code"</span><span class="w">
      </span><span class="p">},</span><span class="w">
      </span><span class="p">{</span><span class="w">
          </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Postmates Unlimited"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3 months free"</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3 months free"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offerUrl"</span><span class="p">:</span><span class="s2">"https://postmates.com/code"</span><span class="w">
      </span><span class="p">},</span><span class="w">
      </span><span class="p">{</span><span class="w">
          </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rent the Runway"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$80 off first 2 months"</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$80 off first 2 months"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offerUrl"</span><span class="p">:</span><span class="s2">"https://renttherunway.com/code"</span><span class="w">
      </span><span class="p">},</span><span class="w">
      </span><span class="p">{</span><span class="w">
          </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Farmer's Dog"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20% off first month"</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20% off first month"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offerUrl"</span><span class="p">:</span><span class="s2">"https://thefarmersdog.com/code"</span><span class="w">
      </span><span class="p">},</span><span class="w">
      </span><span class="p">{</span><span class="w">
          </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birchbox"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20% off first 3 months"</span><span class="w">
+         </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20% off first 3 months"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"offerUrl"</span><span class="p">:</span><span class="s2">"https://birchbox.com/code"</span><span class="w">
      </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in a user&#39;s current subscriptions, gender, age, and zip code. The response is an array of objects consisting of the name of each recommended service and its corresponding offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the name of each recommended service, a description of its corresponding offer, and the affiliate link for your user to claim the offer through. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/recommendations</code></p>
-<h3 id='payload-4'>Payload</h3>
+<h3 id='payload-5'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -597,8 +688,7 @@ Don't forget your authentication key
 <h1 id='transactions'>Transactions</h1>
 <p><small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
 <br>
-<br>
-Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.</p>
+<br></p>
 
 <p>Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:</p>
 
@@ -609,7 +699,9 @@ Lifespan Transactions API enables frictionless transactions between cardholders 
 
 <p>Facilitating the actual transaction is the natural next step.</p>
 
-<p>We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.</p>
+<p>The Lifespan Transactions API enables consumers to start new services with the push of a button, as well as maintain uninterrupted service with ongoing card-on-file merchants throughout card changes. </p>
+
+<p>Upon a card change or new transaction event, Lifespan receives an encrypted payload of the user’s payment information from the user’s issuing bank and makes it accessible to merchant(s). As the new transaction occurs successfully, confirmations are sent back to the bank and consumer.</p>
 <h1 id='merchants'>Merchants</h1><h2 id='upload-or-update-a-sku'>Upload or Update a SKU</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/merchants
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
@@ -657,11 +749,11 @@ Lifespan Transactions API enables frictionless transactions between cardholders 
    </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in attributes of a subscription service to upload (POST) or update (PUT). It returns an object with a 200 status code if the call succeeded.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/merchants</code></p>
 
 <p><code>PUT https://api.lifespan.co/merchants</code></p>
-<h3 id='payload-5'>Payload</h3>
+<h3 id='payload-6'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
