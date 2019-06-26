@@ -265,7 +265,7 @@
                     <a href="#get-cancellation-information-for-a-subscription" class="toc-h2 toc-link" data-title="Get Cancellation Information For a Subscription">Get Cancellation Information For a Subscription</a>
                   </li>
                   <li>
-                    <a href="#get-the-details-of-a-specific-cancellation" class="toc-h2 toc-link" data-title="Get the Details of a Specific Cancellation">Get the Details of a Specific Cancellation</a>
+                    <a href="#get-the-details-of-a-specific-cancellation-request" class="toc-h2 toc-link" data-title="Get the Details of a Specific Cancellation Request">Get the Details of a Specific Cancellation Request</a>
                   </li>
               </ul>
           </li>
@@ -523,14 +523,24 @@ Don't forget your authentication key
     -X POST https://api.lifespan.co/cancellations
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>If the information is instantly available the above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contactDetails"</span><span class="p">:</span><span class="w"> </span><span class="s2">"billing@spotify.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>If not, the above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. In most cases lifespan will return this information instantly but on occasion this process could take up to a few hours. See the example response of <span style="color:#cd3d64;"><code>/cancellations/id</code></span> for an example of the payload returned for a completed cancellation info request.</p>
+<p>This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. In most cases Lifespan will return this information instantly but on occasion this process could take up to a few hours. <span style="color:#cd3d64;"><code>status</code></span> can be <span style="color:#cd3d64;"><code>initiated</code></span>, <span style="color:#cd3d64;"><code>pending</code></span>, or <span style="color:#cd3d64;"><code>complete</code></span>.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/cancellations</code></p>
 <h3 id='payload-3'>Payload</h3>
@@ -563,7 +573,7 @@ Don't forget your authentication key
 </aside>
 
 <p><img src="https://i.imgur.com/KdtluxJ.png" title="Cancellations" alt="alt text" /></p>
-<h2 id='get-the-details-of-a-specific-cancellation'>Get the Details of a Specific Cancellation</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/cancellations/1234"</span>
+<h2 id='get-the-details-of-a-specific-cancellation-request'>Get the Details of a Specific Cancellation Request</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/cancellations/1234"</span>
   -H <span class="s2">"Authorization: {token}"</span>
 </code></pre>
 <blockquote>
