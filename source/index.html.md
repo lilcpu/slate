@@ -225,8 +225,7 @@ curl -d '{
     "merchantName":"Spotify", 
     "merchantState":"NY", 
     "merchantCity":"New York",
-    "merchantZip":"90028",
-    "userEmail": "thanos@lifespan.co"}' 
+    "merchantZip":"90028"}' 
     -H "Content-Type: application/json"
     -H "Authorization: {token}" 
     -X POST https://api.lifespan.co/cancellations
@@ -241,7 +240,7 @@ curl -d '{
 }
 ```
 
-This endpoint takes in a merchant name, merchant address info, and the email of the user that would like to cancel their subscription. This email __must__ be the email in use at the service in question. Lifespan will identify and return instructions for the cancellation process of the given merchant. This process usually takes no more than 24 hours and in some cases lifespan can return this information instantly. See the example response of <span style="color:#cd3d64;">`/cancellations/id`</span> for an example of the payload returned for a completed cancellation info request.
+This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. This process usually takes no more than 24 hours and in some cases lifespan can return this information instantly. See the example response of <span style="color:#cd3d64;">`/cancellations/id`</span> for an example of the payload returned for a completed cancellation info request.
 
 ### HTTP Request
 
@@ -255,7 +254,6 @@ merchantName <span style="color:#8792a2; font-size:12px;">string</span> | The na
 merchantState <span style="color:#8792a2; font-size:12px;">string</span> | The state of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 merchantCity <span style="color:#8792a2; font-size:12px;">string</span> | The city of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 merchantZip <span style="color:#8792a2; font-size:12px;">string</span> | The zip code of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-userEmail <span style="color:#8792a2; font-size:12px;">string</span> | The email address of the user that would like to cancel the subscription. This email must be the one associated with the user's account with the merchant. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
@@ -279,7 +277,6 @@ curl "https://api.lifespan.co/cancellations/1234"
   "merchantState":"NY", 
   "merchantCity":"New York",
   "merchantZip":"90028",
-  "userEmail": "thanos@lifespan.co",
   "status": "completed",
   "type": "phone",
   "contactDetails": "1234567890"
