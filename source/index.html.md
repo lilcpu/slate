@@ -127,6 +127,7 @@ curl -d '{
 
 ```json
 {
+  "requestId":1234,
   "services" : [
       {
         "name": "Spotify",
@@ -140,7 +141,7 @@ curl -d '{
 }
 ```
 
-This endpoint returns a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. Use negative <span style="color:#cd3d64;">`amount`</span> values for account credits and positive values for charges. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
+This endpoint returns a <span style="color:#cd3d64;">`requestId`</span> and a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. Use negative <span style="color:#cd3d64;">`amount`</span> values for account credits and positive values for charges. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
 
 ### HTTP Request
 
@@ -156,12 +157,76 @@ transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-
 Don't forget your authentication key
 </aside>
 
-# Cancellations
-
-## Cancel a Subscription
+## Get New Recurring Payments from a Transaction History of an Existing User
 
 ```shell
-curl -d '{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}' 
+curl -d '{
+    "requestId": 1234,
+    "transactions":[ 
+      {
+        "amount":12.99,
+        "name":"spotify",
+        "date":"2019-05-16"
+      },
+      {
+        "amount":15.99,
+        "name":"netflix",
+        "date":"2019-05-16"
+      },
+      ...
+    ]}' 
+    -H "Content-Type: application/json"
+    -H "Authorization: {token}" 
+    -X POST https://api.lifespan.co/services/updates
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "services" : [
+      {
+        "name": "HBO",
+        "price": 1499
+      },
+      {
+        "name": "Hulu",
+        "price": 1299
+      },
+    ]
+}
+```
+
+This endpoint returns a list of all _new_ recurring payments found in a _new_ transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodicaly (preferrably monthly) in order to stay up to date with your user's new subscription enrollments. 
+
+Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. Use negative <span style="color:#cd3d64;">`amount`</span> values for account credits and positive values for charges. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
+
+### HTTP Request
+
+`POST https://api.lifespan.co/services/updates`
+
+### Payload
+
+Parameter | Description
+--------- | -----------
+requestId <span style="color:#8792a2; font-size:12px;">integer</span> | the `requestId` returned by the inital call to `/services` for this user <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. __Must include amount, date and name fields__ <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
+# Cancellations
+
+## Get Cancelleation Information For a Subscription
+
+```shell
+curl -d '{
+    "merchantName":"Spotify", 
+    "merchantState":"NY", 
+    "merchantCity":"New York",
+    "merchantZip":"90028",
+    "userEmail": "thanos@lifespan.co"}' 
     -H "Content-Type: application/json"
     -H "Authorization: {token}" 
     -X POST https://api.lifespan.co/cancellations
@@ -176,7 +241,7 @@ curl -d '{"merchantName":"Spotify", "userEmail": "thanos@lifespan.co"}'
 }
 ```
 
-This endpoint takes in a merchant name and the email of the user that would like to cancel their subscription. This email __must__ be the email in use at the service in question. The cancellation will be initiated and that user will receive email updates on the cancellation status as it progresses. Usually no more than 24 hours.
+This endpoint takes in a merchant name, merchant address info, and the email of the user that would like to cancel their subscription. This email __must__ be the email in use at the service in question. Lifespan will identify and return instructions for the cancellation process of the given merchant. This process usually takes no more than 24 hours and in some cases lifespan can return this information instantly. See the example response of <span style="color:#cd3d64;">`/cancellations/id`</span> for an example of the payload returned for a completed cancellation info request.
 
 ### HTTP Request
 
@@ -187,6 +252,9 @@ This endpoint takes in a merchant name and the email of the user that would like
 Parameter | Description
 --------- | -----------
 merchantName <span style="color:#8792a2; font-size:12px;">string</span> | The name of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+merchantState <span style="color:#8792a2; font-size:12px;">string</span> | The state of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+merchantCity <span style="color:#8792a2; font-size:12px;">string</span> | The city of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+merchantZip <span style="color:#8792a2; font-size:12px;">string</span> | The zip code of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 userEmail <span style="color:#8792a2; font-size:12px;">string</span> | The email address of the user that would like to cancel the subscription. This email must be the one associated with the user's account with the merchant. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
@@ -208,8 +276,13 @@ curl "https://api.lifespan.co/cancellations/1234"
 {
   "id": 1234,
   "merchantName": "Spotify",
+  "merchantState":"NY", 
+  "merchantCity":"New York",
+  "merchantZip":"90028",
   "userEmail": "thanos@lifespan.co",
-  "status": "completed"
+  "status": "completed",
+  "type": "phone",
+  "contactDetails": "1234567890"
 }
 ```
 
@@ -262,28 +335,33 @@ curl -X POST https://api.lifespan.co/recommendations
   "recommendations": [
      {
          "service": "New York Times",
-         "offer": "30% off first 3 months"
+         "offer": "30% off first 3 months",
+         "offerUrl":"https://nyt.com/code"
      },
      {
          "service": "Postmates Unlimited",
-         "offer": "3 months free"
+         "offer": "3 months free",
+         "offerUrl":"https://postmates.com/code"
      },
      {
          "service": "Rent the Runway",
-         "offer": "$80 off first 2 months"
+         "offer": "$80 off first 2 months",
+         "offerUrl":"https://renttherunway.com/code"
      },
      {
          "service": "The Farmer's Dog",
-         "offer": "20% off first month"
+         "offer": "20% off first month",
+         "offerUrl":"https://thefarmersdog.com/code"
      },
      {
          "service": "Birchbox",
-         "offer": "20% off first 3 months"
+         "offer": "20% off first 3 months",
+         "offerUrl":"https://birchbox.com/code"
      }
 }
 ```
 
-This endpoint takes in a user's current subscriptions, gender, age, and zip code. The response is an array of objects consisting of the name of each recommended service and its corresponding offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.
+This endpoint takes in a user's current <span style="color:#cd3d64;">`subscriptions`</span>, <span style="color:#cd3d64;">`gender`</span>, <span style="color:#cd3d64;">`age`</span>, and <span style="color:#cd3d64;">`zip`</span> code. The response is an array of objects consisting of the name of each recommended service, a description of its corresponding offer, and the affiliate link for your user to claim the offer through. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.
 
 ### HTTP Request
 
