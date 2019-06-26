@@ -514,8 +514,7 @@ Don't forget your authentication key
     "merchantName":"Spotify", 
     "merchantState":"NY", 
     "merchantCity":"New York",
-    "merchantZip":"90028",
-    "userEmail": "thanos@lifespan.co"}'</span> 
+    "merchantZip":"90028"}'</span> 
     -H <span class="s2">"Content-Type: application/json"</span>
     -H <span class="s2">"Authorization: {token}"</span> 
     -X POST https://api.lifespan.co/cancellations
@@ -528,7 +527,7 @@ Don't forget your authentication key
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initiated"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in a merchant name, merchant address info, and the email of the user that would like to cancel their subscription. This email <strong>must</strong> be the email in use at the service in question. Lifespan will identify and return instructions for the cancellation process of the given merchant. This process usually takes no more than 24 hours and in some cases lifespan can return this information instantly. See the example response of <span style="color:#cd3d64;"><code>/cancellations/id</code></span> for an example of the payload returned for a completed cancellation info request.</p>
+<p>This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. This process usually takes no more than 24 hours and in some cases lifespan can return this information instantly. See the example response of <span style="color:#cd3d64;"><code>/cancellations/id</code></span> for an example of the payload returned for a completed cancellation info request.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/cancellations</code></p>
 <h3 id='payload-3'>Payload</h3>
@@ -554,10 +553,6 @@ Don't forget your authentication key
 <td>merchantZip <span style="color:#8792a2; font-size:12px;">string</span></td>
 <td>The zip code of the subscription merchant the user would like to cancel. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
 </tr>
-<tr>
-<td>userEmail <span style="color:#8792a2; font-size:12px;">string</span></td>
-<td>The email address of the user that would like to cancel the subscription. This email must be the one associated with the user&#39;s account with the merchant. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
 </tbody></table>
 
 <aside class="success">
@@ -577,7 +572,6 @@ Don't forget your authentication key
   </span><span class="s2">"merchantState"</span><span class="p">:</span><span class="s2">"NY"</span><span class="p">,</span><span class="w"> 
   </span><span class="s2">"merchantCity"</span><span class="p">:</span><span class="s2">"New York"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"merchantZip"</span><span class="p">:</span><span class="s2">"90028"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"userEmail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thanos@lifespan.co"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"contactDetails"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="w">
