@@ -386,7 +386,6 @@ Don't forget your authentication key
 <small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
 <br>
 <br>
-Lifespan Transactions API enables frictionless transactions between cardholders and subscription merchants. Banks will be able to rapidly expand cards on file by tapping into one of the fastest growing segments of ecommerce (<a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">McKinsey report</a>) via one simple and secure API.
 
 Thus far, the Lifespan API has enabled banks to offer their cardholders two core value propositions:
 
