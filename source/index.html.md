@@ -243,7 +243,7 @@ curl -d '{
 }
 ```
 
-This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. This process usually takes no more than 24 hours and in some cases lifespan can return this information instantly. See the example response of <span style="color:#cd3d64;">`/cancellations/id`</span> for an example of the payload returned for a completed cancellation info request.
+This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. In most cases lifespan will return this information instantly but in some cases this process could take up to a few hours. See the example response of <span style="color:#cd3d64;">`/cancellations/id`</span> for an example of the payload returned for a completed cancellation info request.
 
 ### HTTP Request
 
