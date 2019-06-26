@@ -262,7 +262,7 @@
             <a href="#cancellations" class="toc-h1 toc-link" data-title="Cancellations">Cancellations</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-cancelleation-information-for-a-subscription" class="toc-h2 toc-link" data-title="Get Cancelleation Information For a Subscription">Get Cancelleation Information For a Subscription</a>
+                    <a href="#get-cancellation-information-for-a-subscription" class="toc-h2 toc-link" data-title="Get Cancellation Information For a Subscription">Get Cancellation Information For a Subscription</a>
                   </li>
                   <li>
                     <a href="#get-the-details-of-a-specific-cancellation" class="toc-h2 toc-link" data-title="Get the Details of a Specific Cancellation">Get the Details of a Specific Cancellation</a>
@@ -333,7 +333,7 @@
 <li>Request an <code>access_token</code> (see example).</li>
 </ol>
 
-<p>After you recieve an <code>access_token</code> store it in your database for future use. When making requests to the Lifespan API you <strong>must</strong> include the token in the authorization header like so: <code>Authorization: Bearer {token}</code></p>
+<p>After you receive an <code>access_token</code> store it in your database for future use. When making requests to the Lifespan API you <strong>must</strong> include the token in the authorization header like so: <code>Authorization: Bearer {token}</code></p>
 
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
@@ -485,7 +485,7 @@ Don't forget your authentication key
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint returns a list of all <em>new</em> recurring payments found in a <em>new</em> transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodicaly (preferrably monthly) in order to stay up to date with your user&#39;s new subscription enrollments. </p>
+<p>This endpoint returns a list of all <em>new</em> recurring payments found in a <em>new</em> transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodically (preferably monthly) in order to stay up to date with your user&#39;s new subscription enrollments.</p>
 
 <p>Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
@@ -510,7 +510,7 @@ Don't forget your authentication key
 <aside class="success">
 Don't forget your authentication key
 </aside>
-<h1 id='cancellations'>Cancellations</h1><h2 id='get-cancelleation-information-for-a-subscription'>Get Cancelleation Information For a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+<h1 id='cancellations'>Cancellations</h1><h2 id='get-cancellation-information-for-a-subscription'>Get Cancellation Information For a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "merchantName":"Spotify", 
     "merchantState":"NY", 
     "merchantCity":"New York",
