@@ -234,7 +234,18 @@ curl -d '{
     -X POST https://api.lifespan.co/cancellations
 ```
 
-> The above command returns JSON structured like this:
+> If the information is instantly available the above command returns JSON structured like this:
+
+```json
+{
+  "id": 1234,
+  "status": "completed",
+  "type": "email",
+  "contactDetails": "billing@spotify.com"
+}
+```
+
+> If not, the above command returns JSON structured like this:
 
 ```json
 {
@@ -243,7 +254,8 @@ curl -d '{
 }
 ```
 
-This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. In most cases lifespan will return this information instantly but on occasion this process could take up to a few hours. See the example response of <span style="color:#cd3d64;">`/cancellations/id`</span> for an example of the payload returned for a completed cancellation info request.
+
+This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. In most cases Lifespan will return this information instantly but on occasion this process could take up to a few hours. <span style="color:#cd3d64;">`status`</span> can be <span style="color:#cd3d64;">`initiated`</span>, <span style="color:#cd3d64;">`pending`</span>, or <span style="color:#cd3d64;">`complete`</span>.
 
 ### HTTP Request
 
@@ -264,7 +276,7 @@ Don't forget your authentication key
 
 ![alt text](https://i.imgur.com/KdtluxJ.png "Cancellations")
 
-## Get the Details of a Specific Cancellation
+## Get the Details of a Specific Cancellation Request
 
 ```shell
 curl "https://api.lifespan.co/cancellations/1234"
