@@ -78,13 +78,14 @@ You will build a consumer-facing user experience directly into your web or mobil
 
 Display the results of a call to the <a href="#recurring-payments">Recurring Payments API</a> in a list. If you're using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you're using the <a href="#recommendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user's current recurring payments.
 
-![alt text](https://i.imgur.com/XvHUjmi.png "Displaying Recurring Payments and Recommendations Modules")
+![alt text](https://i.imgur.com/JPLaSZg.png "Displaying Recurring Payments and Recommendations Modules")
+![alt text](https://i.imgur.com/n8szahx.png "Displaying Recurring Payments and Recommendations Modules")
 
 ## Displaying the Cancellation Modal
 
 Upon clicking or tapping a cancellation button, render a popup modal prompting the user for their email associated with the given service. The modal should appear over the list of recurring services.
  
-![alt text](https://i.imgur.com/XAB4vD7.png "Cancellation Modal")
+![alt text](https://i.imgur.com/KdtluxJ.png "Cancellation Modal")
 
 ## Visualizing Monthly Payments
 
@@ -152,6 +153,8 @@ This endpoint returns a <span style="color:#cd3d64;">`requestId`</span> and a li
 Parameter | Description
 --------- | -----------
 transactions <span style="color:#8792a2; font-size:12px;">array</span> | A JSON-stringified array of transactions. __Must include amount, date and name fields__ <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+
+![alt text](https://i.imgur.com/JPLaSZg.png "Displaying Recurring Payments and Recommendations Modules")
 
 <aside class="success">
 Don't forget your authentication key
@@ -259,7 +262,7 @@ merchantZip <span style="color:#8792a2; font-size:12px;">string</span> | The zip
 Don't forget your authentication key
 </aside>
 
-![alt text](https://i.imgur.com/FFuV3Rp.png "Cancellations")
+![alt text](https://i.imgur.com/KdtluxJ.png "Cancellations")
 
 ## Get the Details of a Specific Cancellation
 
@@ -377,7 +380,7 @@ zip <span style="color:#8792a2; font-size:12px;">integer</span> | Zip code of us
 Don't forget your authentication key
 </aside>
 
-![alt text](https://i.imgur.com/B2AQGK1.png "Recommendations")
+![alt text](https://i.imgur.com/n8szahx.png "Recommendations")
 
 # Transactions
 <small><span style="color:#09b7b7; font-size:14px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Coming Winter 2019<span></small>
