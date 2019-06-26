@@ -49,7 +49,7 @@ The Lifespan API implements the <a href="https://www.oauth.com/oauth2-servers/ac
 2. We'll send you a `client_id` and a `client_secret`. __Save these somewhere secure.__
 3. Request an `access_token` (see example).
 
-After you recieve an `access_token` store it in your database for future use. When making requests to the Lifespan API you __must__ include the token in the authorization header like so: `Authorization: Bearer {token}`
+After you receive an `access_token` store it in your database for future use. When making requests to the Lifespan API you __must__ include the token in the authorization header like so: `Authorization: Bearer {token}`
 
 <aside class="notice">
 You must replace <code>token</code> with your personal API key.
@@ -197,7 +197,7 @@ curl -d '{
 }
 ```
 
-This endpoint returns a list of all _new_ recurring payments found in a _new_ transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodicaly (preferrably monthly) in order to stay up to date with your user's new subscription enrollments. 
+This endpoint returns a list of all _new_ recurring payments found in a _new_ transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodically (preferably monthly) in order to stay up to date with your user's new subscription enrollments.
 
 Each result will include the merchant <span style="color:#cd3d64;">`name`</span> and the <span style="color:#cd3d64;">`price`</span> of the service. Use negative <span style="color:#cd3d64;">`amount`</span> values for account credits and positive values for charges. The <span style="color:#cd3d64;">`price`</span> field of the returned services is always in cents.
 
@@ -218,7 +218,7 @@ Don't forget your authentication key
 
 # Cancellations
 
-## Get Cancelleation Information For a Subscription
+## Get Cancellation Information For a Subscription
 
 ```shell
 curl -d '{
