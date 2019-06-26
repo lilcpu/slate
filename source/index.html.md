@@ -395,7 +395,9 @@ Thus far, the Lifespan API has enabled banks to offer their cardholders two core
 
 Facilitating the actual transaction is the natural next step.
 
-We make the transaction experience as frictionless as possible, utilizing best in class technology. Consumers will simply push a button to seamlessly start a new trial or subscription service. Merchants will receive user information necessary for a new signup, and your card will automatically go on file.
+The Lifespan Transactions API enables consumers to start new services with the push of a button, as well as maintain uninterrupted service with ongoing card-on-file merchants throughout card changes. 
+
+Upon a card change or new transaction event, Lifespan receives an encrypted payload of the user’s payment information from the user’s issuing bank and makes it accessible to merchant(s). As the new transaction occurs successfully, confirmations are sent back to the bank and consumer.
 
 # Merchants
 
