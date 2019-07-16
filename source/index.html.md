@@ -410,6 +410,51 @@ The Lifespan Transactions API enables consumers to start new services with the p
 
 Upon a card change or new transaction event, Lifespan receives an encrypted payload of the user’s payment information from the user’s issuing bank and makes it accessible to merchant(s). As the new transaction occurs successfully, confirmations are sent back to the bank and consumer.
 
+```shell
+curl -X POST https://api.lifespan.co/transact
+    -H "Authorization: {token}"
+    -H "Content-Type: application/json"
+    -d '{
+         "merchantId" : "12345",
+         "newUsername" : "michael@lifespan.co",
+         "newPassword" : "gr8estB0ssEver2019",
+         "servicePlan" : "premium",
+         "cardDetails" : "{encryptedString}",
+         "sharedAccessToken" : "accessToken"
+       }'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "merchantName" : "Lyft",
+  "status" : 200,
+  "url" : "x-callback-url.apple.developer.com/lyft-app"
+}
+```
+
+This endpoint takes in a user's intended account <span style="color:#cd3d64;">`newUsername`</span>, <span style="color:#cd3d64;">`newPassword`</span>, <span style="color:#cd3d64;">`servicePlan`</span>, <span style="color:#cd3d64;">`sharedAccessToken`</span>, and encrypted <span style="color:#cd3d64;">`cardDetails`</span> payload. The response is a JSON object indicating whether the new account has been successful or not. If successful, a url will be provided to embed at the end of the sign up flow for the user to get the app or visit the website of the service they have just begun service with.
+
+### HTTP Request
+
+`POST https://api.lifespan.co/transact`
+
+### Payload
+
+Parameter | Description
+--------- | -----------
+merchantId <span style="color:#8792a2; font-size:12px;">array</span> | The Lifespan merchant id to sign up with. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+newUsername <span style="color:#8792a2; font-size:12px;">string</span> | The user's intended username <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+newPassword <span style="color:#8792a2; font-size:12px;">integer</span> | The user's intended password <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+newPassword <span style="color:#8792a2; font-size:12px;">integer</span> | The user's selected plan <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+cardDetails <span style="color:#8792a2; font-size:12px;">integer</span> | An encrypted payload of the user's card number, expiry, billing address and security code if applicable. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+sharedAccessToken <span style="color:#8792a2; font-size:12px;">integer</span> | A lifespan issued shared access token for decryption of the payload. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+
 # Merchants
 
 ## Upload or Update a SKU
