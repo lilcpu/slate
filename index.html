@@ -282,6 +282,14 @@
           </li>
           <li>
             <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#http-request-6" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
+                  </li>
+                  <li>
+                    <a href="#payload-6" class="toc-h2 toc-link" data-title="Payload">Payload</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#merchants" class="toc-h1 toc-link" data-title="Merchants">Merchants</a>
@@ -709,6 +717,66 @@ Don't forget your authentication key
 <p>The Lifespan Transactions API enables consumers to start new services with the push of a button, as well as maintain uninterrupted service with ongoing card-on-file merchants throughout card changes. </p>
 
 <p>Upon a card change or new transaction event, Lifespan receives an encrypted payload of the user’s payment information from the user’s issuing bank and makes it accessible to merchant(s). As the new transaction occurs successfully, confirmations are sent back to the bank and consumer.</p>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/transact
+    -H <span class="s2">"Authorization: {token}"</span>
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -d <span class="s1">'{
+         "merchantId" : "12345",
+         "newUsername" : "michael@lifespan.co",
+         "newPassword" : "gr8estB0ssEver2019",
+         "servicePlan" : "premium",
+         "cardDetails" : "{encryptedString}",
+         "sharedAccessToken" : "accessToken"
+       }'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"merchantName"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Lyft"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"x-callback-url.apple.developer.com/lyft-app"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint takes in a user&#39;s intended account <span style="color:#cd3d64;"><code>newUsername</code></span>, <span style="color:#cd3d64;"><code>newPassword</code></span>, <span style="color:#cd3d64;"><code>servicePlan</code></span>, <span style="color:#cd3d64;"><code>sharedAccessToken</code></span>, and encrypted <span style="color:#cd3d64;"><code>cardDetails</code></span> payload. The response is a JSON object indicating whether the new account has been successful or not. If successful, a url will be provided to embed at the end of the sign up flow for the user to get the app or visit the website of the service they have just begun service with.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST https://api.lifespan.co/transact</code></p>
+<h3 id='payload-6'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>merchantId <span style="color:#8792a2; font-size:12px;">array</span></td>
+<td>The Lifespan merchant id to sign up with. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>newUsername <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The user&#39;s intended username <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>newPassword <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>The user&#39;s intended password <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>newPassword <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>The user&#39;s selected plan <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>cardDetails <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>An encrypted payload of the user&#39;s card number, expiry, billing address and security code if applicable. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+<tr>
+<td>sharedAccessToken <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>A lifespan issued shared access token for decryption of the payload. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
 <h1 id='merchants'>Merchants</h1><h2 id='upload-or-update-a-sku'>Upload or Update a SKU</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/merchants
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
@@ -756,11 +824,11 @@ Don't forget your authentication key
    </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in attributes of a subscription service to upload (POST) or update (PUT). It returns an object with a 200 status code if the call succeeded.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h3 id='http-request-7'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/merchants</code></p>
 
 <p><code>PUT https://api.lifespan.co/merchants</code></p>
-<h3 id='payload-6'>Payload</h3>
+<h3 id='payload-7'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
