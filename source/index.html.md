@@ -419,8 +419,25 @@ curl -X POST https://api.lifespan.co/transact
          "newUsername" : "michael@lifespan.co",
          "newPassword" : "gr8estB0ssEver2019",
          "servicePlan" : "premium",
-         "cardDetails" : "{encryptedString}",
-         "sharedAccessToken" : "accessToken"
+         "encryptedPayload" : "{
+          "publicKeyFingerprint": "4c4ead5927f0df8117f178eea9308daa58e27c2b",
+          "hashingAlgorithm": "SHA512",
+          "encryptedKey": "A1B2C3D4E5F6112233445566",
+          "encryptedData": "{
+              "accountNumber": "1234567891011125",
+              "securityCode": "123",
+              "expiryMonth": 1,
+              "expiryYear": 2021,
+              "address": "{
+                "line1": "1780 N. Scranton Ave",
+                "line2": "apt 107",
+                "city": "Scranton",
+                "state": "PA",
+                "country": "US",
+                "postalCode": "90028"  
+              }"
+            }"
+         }"
        }'
 ```
 
@@ -434,7 +451,7 @@ curl -X POST https://api.lifespan.co/transact
 }
 ```
 
-This endpoint takes in a user's intended account <span style="color:#cd3d64;">`newUsername`</span>, <span style="color:#cd3d64;">`newPassword`</span>, <span style="color:#cd3d64;">`servicePlan`</span>, <span style="color:#cd3d64;">`sharedAccessToken`</span>, and encrypted <span style="color:#cd3d64;">`cardDetails`</span> payload. The response is a JSON object indicating whether the new account has been successful or not. If successful, a url will be provided to embed at the end of the sign up flow for the user to get the app or visit the website of the service they have just begun service with.
+This endpoint takes in a user's intended account <span style="color:#cd3d64;">`newUsername`</span>, <span style="color:#cd3d64;">`newPassword`</span>, <span style="color:#cd3d64;">`servicePlan`</span>, and <span style="color:#cd3d64;">`encryptedPayload`</span>. The response is a JSON object indicating whether the new account has been successful or not. If successful, a url will be provided to embed at the end of the sign up flow for the user to get the app or visit the website of the service they have just begun service with.
 
 ### HTTP Request
 
@@ -444,12 +461,11 @@ This endpoint takes in a user's intended account <span style="color:#cd3d64;">`n
 
 Parameter | Description
 --------- | -----------
-merchantId <span style="color:#8792a2; font-size:12px;">array</span> | The Lifespan merchant id to sign up with. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+merchantId <span style="color:#8792a2; font-size:12px;">integer</span> | The Lifespan merchant id to sign up with. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 newUsername <span style="color:#8792a2; font-size:12px;">string</span> | The user's intended username <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-newPassword <span style="color:#8792a2; font-size:12px;">integer</span> | The user's intended password <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-newPassword <span style="color:#8792a2; font-size:12px;">integer</span> | The user's selected plan <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-cardDetails <span style="color:#8792a2; font-size:12px;">integer</span> | An encrypted payload of the user's card number, expiry, billing address and security code if applicable. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
-sharedAccessToken <span style="color:#8792a2; font-size:12px;">integer</span> | A lifespan issued shared access token for decryption of the payload. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+newPassword <span style="color:#8792a2; font-size:12px;">string</span> | The user's intended password <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+servicePlan <span style="color:#8792a2; font-size:12px;">string</span> | The user's selected plan <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+encryptedPayload <span style="color:#8792a2; font-size:12px;">string</span> | An encrypted payload including a key encrypted by the lifespan shared public key with which lifespan can decrypt the payload, the public key fingerprint of the lifespan public key and the hashing algorithm used to encrypt the key. Additionally, a child object called `encrypted data` will include of the user's card number, expiry, billing address and security code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
 
 <aside class="success">
 Don't forget your authentication key
