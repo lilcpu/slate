@@ -108,11 +108,13 @@ The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem wit
 curl -d '{
     "transactions":[ 
       {
+        "accountId": uuid,
         "amount":12.99,
         "name":"spotify",
         "date":"2019-05-16"
       },
       {
+        "accountId": uuid,
         "amount":15.99,
         "name":"netflix",
         "date":"2019-05-16"
@@ -128,7 +130,6 @@ curl -d '{
 
 ```json
 {
-  "requestId":1234,
   "services" : [
       {
         "name": "Spotify",
