@@ -130,8 +130,9 @@ curl -d '{
 
 ```json
 {
-  "services" : [
-      {
+  "services" : {
+    "{accountId}" :
+      [{
         "name": "Spotify",
         "price": 1299
       },
@@ -139,7 +140,7 @@ curl -d '{
         "name": "Netflix",
         "price": 1599
       },
-    ]
+    ]}
 }
 ```
 
