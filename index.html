@@ -282,14 +282,6 @@
           </li>
           <li>
             <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#http-request-6" class="toc-h2 toc-link" data-title="HTTP Request">HTTP Request</a>
-                  </li>
-                  <li>
-                    <a href="#payload-6" class="toc-h2 toc-link" data-title="Payload">Payload</a>
-                  </li>
-              </ul>
           </li>
           <li>
             <a href="#merchants" class="toc-h1 toc-link" data-title="Merchants">Merchants</a>
@@ -305,7 +297,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p><span style="color:#32325D; font-size:25px; font-weight: 400; line-height: 40px;">Lifespan offers APIs for <span style="color:#08B7B7; font-weight: 600">driving financial wellness</span> and <span style="color:#08B7B7; font-weight: 600">expanding cards on file</span> in the exploding Subscription Economy.</span></p>
+<p><span style="color:#32325D; font-size:25px; font-weight: 400; line-height: 40px;">Lifespan offers APIs for <span style="color:#08B7B7; font-weight: 600">driving down churn</span> and <span style="color:#08B7B7; font-weight: 600">expanding cards on file</span> in the exploding Subscription Economy.</span></p>
 
 <p>Lifespan is an end-to-end API for subscription management, discovery, and transactions. It&#39;s infrastructure that enables your cardholders to view, cancel, and add new subscription services frictionlessly within your web and mobile apps. You can integrate any feature individually or all together as a bundle.</p>
 
@@ -408,13 +400,11 @@ You must replace <code>token</code> with your personal API key.
 <h1 id='recurring-payments'>Recurring Payments</h1><h2 id='get-all-recurring-payments-from-a-transaction-history'>Get All Recurring Payments from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "transactions":[ 
       {
-        "accountId": uuid,
         "amount":12.99,
         "name":"spotify",
         "date":"2019-05-16"
       },
       {
-        "accountId": uuid,
         "amount":15.99,
         "name":"netflix",
         "date":"2019-05-16"
@@ -429,9 +419,9 @@ You must replace <code>token</code> with your personal API key.
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"services"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"{accountId}"</span><span class="w"> </span><span class="p">:</span><span class="w">
-      </span><span class="p">[{</span><span class="w">
+  </span><span class="s2">"requestId"</span><span class="p">:</span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"services"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1299</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -439,7 +429,7 @@ You must replace <code>token</code> with your personal API key.
         </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1599</span><span class="w">
       </span><span class="p">},</span><span class="w">
-    </span><span class="p">]}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint returns a <span style="color:#cd3d64;"><code>requestId</code></span> and a list of all recurring payments found in a transaction history for a given card account. Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
@@ -719,79 +709,6 @@ Don't forget your authentication key
 <p>The Lifespan Transactions API enables consumers to start new services with the push of a button, as well as maintain uninterrupted service with ongoing card-on-file merchants throughout card changes. </p>
 
 <p>Upon a card change or new transaction event, Lifespan receives an encrypted payload of the user’s payment information from the user’s issuing bank and makes it accessible to merchant(s). As the new transaction occurs successfully, confirmations are sent back to the bank and consumer.</p>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/transact
-    -H <span class="s2">"Authorization: {token}"</span>
-    -H <span class="s2">"Content-Type: application/json"</span>
-    -d <span class="s1">'{
-         "merchantId" : "12345",
-         "newUsername" : "michael@lifespan.co",
-         "newPassword" : "gr8estB0ssEver2019",
-         "servicePlan" : "premium",
-         "encryptedPayload" : "{ // example of decrypted payload
-          "publicKeyFingerprint": "4c4ead5927f0df8117f178eea9308daa58e27c2b",
-          "hashingAlgorithm": "SHA512",
-          "encryptedKey": "A1B2C3D4E5F6112233445566",
-          "encryptedData": "{
-              "accountNumber": "1234567891011125",
-              "securityCode": "123",
-              "expiryMonth": 1,
-              "expiryYear": 2021,
-              "address": "{
-                "line1": "1780 N. Scranton Ave",
-                "line2": "apt 107",
-                "city": "Scranton",
-                "state": "PA",
-                "country": "US",
-                "postalCode": "90028"  
-              }"
-            }"
-         }"
-       }'</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"merchantName"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Lyft"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"url"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"x-callback-url.apple.developer.com/lyft-app"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint takes in a user&#39;s intended account <span style="color:#cd3d64;"><code>newUsername</code></span>, <span style="color:#cd3d64;"><code>newPassword</code></span>, <span style="color:#cd3d64;"><code>servicePlan</code></span>, and <span style="color:#cd3d64;"><code>encryptedPayload</code></span>. The response is a JSON object indicating whether the new account has been successful or not. If successful, a url will be provided to embed at the end of the sign up flow for the user to get the app or visit the website of the service they have just begun service with.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST https://api.lifespan.co/transact</code></p>
-<h3 id='payload-6'>Payload</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>merchantId <span style="color:#8792a2; font-size:12px;">integer</span></td>
-<td>The Lifespan merchant id to sign up with. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-<tr>
-<td>newUsername <span style="color:#8792a2; font-size:12px;">string</span></td>
-<td>The user&#39;s intended username <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-<tr>
-<td>newPassword <span style="color:#8792a2; font-size:12px;">string</span></td>
-<td>The user&#39;s intended password <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-<tr>
-<td>servicePlan <span style="color:#8792a2; font-size:12px;">string</span></td>
-<td>The user&#39;s selected plan <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-<tr>
-<td>encryptedPayload <span style="color:#8792a2; font-size:12px;">string</span></td>
-<td>An encrypted payload including a key encrypted by the lifespan shared public key with which lifespan can decrypt the payload, the public key fingerprint of the lifespan public key and the hashing algorithm used to encrypt the key. Additionally, a child object called <code>encryptedData</code> will include of the user&#39;s card number, expiry, billing address and security code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Don't forget your authentication key
-</aside>
 <h1 id='merchants'>Merchants</h1><h2 id='upload-or-update-a-sku'>Upload or Update a SKU</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/merchants
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
@@ -839,11 +756,11 @@ Don't forget your authentication key
    </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in attributes of a subscription service to upload (POST) or update (PUT). It returns an object with a 200 status code if the call succeeded.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/merchants</code></p>
 
 <p><code>PUT https://api.lifespan.co/merchants</code></p>
-<h3 id='payload-7'>Payload</h3>
+<h3 id='payload-6'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
