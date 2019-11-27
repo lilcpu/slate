@@ -494,7 +494,7 @@ Don't forget your authentication key
 <p>This endpoint returns a list of all <em>new</em> recurring payments found in a <em>new</em> transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodically (preferably monthly) in order to stay up to date with your user&#39;s new subscription enrollments.</p>
 
 <p>Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h3 id='endpoint'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/services/updates</code></p>
 <h3 id='payload-2'>Payload</h3>
 <table><thead>
@@ -544,7 +544,7 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in a merchant name and merchant address info. Lifespan will identify and return instructions for the cancellation process of the given merchant. In most cases Lifespan will return this information instantly but on occasion this process could take up to a few hours. <span style="color:#cd3d64;"><code>status</code></span> can be <span style="color:#cd3d64;"><code>initiated</code></span>, <span style="color:#cd3d64;"><code>pending</code></span>, or <span style="color:#cd3d64;"><code>complete</code></span>.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h3 id='endpoint-2'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/cancellations</code></p>
 <h3 id='payload-3'>Payload</h3>
 <table><thead>
@@ -594,7 +594,7 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint returns the details of a given cancellation id.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h3 id='endpoint-3'>Endpoint</h3>
 <p><code>GET https://api.lifespan.co/cancellations/&lt;id&gt;</code></p>
 <h3 id='payload-4'>Payload</h3>
 <table><thead>
@@ -659,7 +659,7 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the merchant&#39;s name, logo URL, description, and offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='endpoint-4'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/recommendations</code></p>
 <h3 id='payload-5'>Payload</h3>
 <table><thead>
@@ -721,8 +721,8 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the merchant&#39;s name, logo URL, description, and offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
-<p><code>POST https://api.lifespan.co/recommendations</code></p>
+<h3 id='endpoint-5'>Endpoint</h3>
+<p><code>POST https://api.lifespan.co/merchants/:id</code></p>
 <h3 id='payload-6'>Payload</h3>
 <table><thead>
 <tr>
@@ -815,7 +815,7 @@ Don't forget your authentication key
    </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in attributes of a subscription service to upload (POST) or update (PUT). It returns an object with a 200 status code if the call succeeded.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h3 id='endpoints'>Endpoints</h3>
 <p><code>POST https://api.lifespan.co/merchants</code></p>
 
 <p><code>PUT https://api.lifespan.co/merchants</code></p>
