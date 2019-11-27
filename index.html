@@ -720,7 +720,7 @@ Don't forget your authentication key
      </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in a merchant&#39;s <span style="color:#cd3d64;"><code>id</code></span> in the URL and returns the merchant&#39;s plans as an array of objects. Each plan has a name, id, description, and price. The merchant&#39;s ID is provided as a response from the /merchants endpoint.</p>
+<p>This endpoint takes in a merchant&#39;s <span style="color:#cd3d64;"><code>id</code></span> in the URL. No other arguments are necessary. The response consists of an array of objects representing a plan of the merchant. Each plan object contains a name, id, description, and price. The merchant&#39;s ID for the request is provided in the response from the /merchants endpoint.</p>
 <h3 id='endpoint-5'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/merchants/:id</code></p>
 
