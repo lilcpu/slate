@@ -652,7 +652,7 @@ Don't forget your authentication key
      </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the name of each recommended service, a description of its corresponding offer, and the affiliate link for your user to claim the offer through. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
+<p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the merchant&#39;s name, logo URL, description, and offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>POST https://api.lifespan.co/recommendations</code></p>
 <h3 id='payload-5'>Payload</h3>
