@@ -723,30 +723,6 @@ Don't forget your authentication key
 <p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the merchant&#39;s name, logo URL, description, and offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
 <h3 id='endpoint-5'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/merchants/:id</code></p>
-<h3 id='payload-6'>Payload</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>subscriptions <span style="color:#8792a2; font-size:12px;">array</span></td>
-<td>List of user&#39;s current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-<tr>
-<td>gender <span style="color:#8792a2; font-size:12px;">string</span></td>
-<td>User&#39;s gender. Value can either be <span style="color:#cd3d64;"><code>male</code></span> or <span style="color:#cd3d64;"><code>female</code></span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-<tr>
-<td>age <span style="color:#8792a2; font-size:12px;">integer</span></td>
-<td>User&#39;s age in years. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-<tr>
-<td>zip <span style="color:#8792a2; font-size:12px;">integer</span></td>
-<td>Zip code of user&#39;s residence. Must be a valid United States code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
-</tr>
-</tbody></table>
 
 <aside class="success">
 Don't forget your authentication key
@@ -819,7 +795,7 @@ Don't forget your authentication key
 <p><code>POST https://api.lifespan.co/merchants</code></p>
 
 <p><code>PUT https://api.lifespan.co/merchants</code></p>
-<h3 id='payload-7'>Payload</h3>
+<h3 id='payload-6'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
