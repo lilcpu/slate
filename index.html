@@ -783,7 +783,7 @@ Don't forget your authentication key
 </span></code></pre>
 <p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the merchant&#39;s name, logo URL, description, and offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
 <h3 id='endpoint-6'>Endpoint</h3>
-<p><code>POST https://api.lifespan.co/recommendations</code></p>
+<p><code>POST https://api.lifespan.co/transactions</code></p>
 <h3 id='payload-6'>Payload</h3>
 <table><thead>
 <tr>
@@ -792,20 +792,20 @@ Don't forget your authentication key
 </tr>
 </thead><tbody>
 <tr>
-<td>subscriptions <span style="color:#8792a2; font-size:12px;">array</span></td>
-<td>List of user&#39;s current subscription services. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+<td>iv <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>Initialization vector for the encryption of sensitive data with AES CBC. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
 </tr>
 <tr>
-<td>gender <span style="color:#8792a2; font-size:12px;">string</span></td>
-<td>User&#39;s gender. Value can either be <span style="color:#cd3d64;"><code>male</code></span> or <span style="color:#cd3d64;"><code>female</code></span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+<td>encryptedKey <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>Contains the sensitive JSON payload encrypted using the AES session key and the initalization vector. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
 </tr>
 <tr>
-<td>age <span style="color:#8792a2; font-size:12px;">integer</span></td>
-<td>User&#39;s age in years. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+<td>publicKeyFingerprint <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>Hex-encoded SHA-512 digest of the recipient&#39;s RSA public key used for encryption. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
 </tr>
 <tr>
-<td>zip <span style="color:#8792a2; font-size:12px;">integer</span></td>
-<td>Zip code of user&#39;s residence. Must be a valid United States code. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+<td>oaepPaddingDigestAlgorithm <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>Indicates the digest algorithm used with the RSA-OAEP scheme. Must be either SHA256 or SHA512. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
 </tr>
 </tbody></table>
 
