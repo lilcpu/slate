@@ -248,7 +248,7 @@
             <a href="#banks" class="toc-h1 toc-link" data-title="Banks">Banks</a>
           </li>
           <li>
-            <a href="#current-subscriptions" class="toc-h1 toc-link" data-title="Current Subscriptions">Current Subscriptions</a>
+            <a href="#current-subscriptions-api" class="toc-h1 toc-link" data-title="Current Subscriptions API">Current Subscriptions API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-all-current-subscriptions-from-a-transaction-history" class="toc-h2 toc-link" data-title="Get All Current Subscriptions from a Transaction History">Get All Current Subscriptions from a Transaction History</a>
@@ -259,7 +259,7 @@
               </ul>
           </li>
           <li>
-            <a href="#cancellations" class="toc-h1 toc-link" data-title="Cancellations">Cancellations</a>
+            <a href="#cancellations-api" class="toc-h1 toc-link" data-title="Cancellations API">Cancellations API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-cancellation-information-for-a-subscription" class="toc-h2 toc-link" data-title="Get Cancellation Information For a Subscription">Get Cancellation Information For a Subscription</a>
@@ -270,7 +270,7 @@
               </ul>
           </li>
           <li>
-            <a href="#recommendations" class="toc-h1 toc-link" data-title="Recommendations">Recommendations</a>
+            <a href="#recommendations-api" class="toc-h1 toc-link" data-title="Recommendations API">Recommendations API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-recommended-merchants" class="toc-h2 toc-link" data-title="Get Recommended Merchants">Get Recommended Merchants</a>
@@ -281,7 +281,7 @@
               </ul>
           </li>
           <li>
-            <a href="#transactions" class="toc-h1 toc-link" data-title="Transactions">Transactions</a>
+            <a href="#transactions-api" class="toc-h1 toc-link" data-title="Transactions API">Transactions API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#create-transaction" class="toc-h2 toc-link" data-title="Create Transaction">Create Transaction</a>
@@ -405,7 +405,7 @@ You must replace <code>token</code> with your personal API key.
 <p>The <a href='#recurring-payments'>Current Subscriptions API</a> allows developers to find a user&#39;s recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
 
 <p>The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Current Subscriptions API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
-<h1 id='current-subscriptions'>Current Subscriptions</h1><h2 id='get-all-current-subscriptions-from-a-transaction-history'>Get All Current Subscriptions from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+<h1 id='current-subscriptions-api'>Current Subscriptions API</h1><h2 id='get-all-current-subscriptions-from-a-transaction-history'>Get All Current Subscriptions from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "transactions":[ 
       {
         "amount":12.99,
@@ -521,7 +521,7 @@ Don't forget your authentication key
 <aside class="success">
 Don't forget your authentication key
 </aside>
-<h1 id='cancellations'>Cancellations</h1><h2 id='get-cancellation-information-for-a-subscription'>Get Cancellation Information For a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+<h1 id='cancellations-api'>Cancellations API</h1><h2 id='get-cancellation-information-for-a-subscription'>Get Cancellation Information For a Subscription</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "merchantName":"Spotify", 
     "merchantState":"NY", 
     "merchantCity":"New York",
@@ -617,7 +617,7 @@ Don't forget your authentication key
 <aside class="success">
 Don't forget your authentication key
 </aside>
-<h1 id='recommendations'>Recommendations</h1><h2 id='get-recommended-merchants'>Get Recommended Merchants</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/recommendations
+<h1 id='recommendations-api'>Recommendations API</h1><h2 id='get-recommended-merchants'>Get Recommended Merchants</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/recommendations
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
     -d <span class="s1">'{
@@ -730,7 +730,7 @@ Don't forget your authentication key
 <aside class="success">
 Don't forget your authentication key
 </aside>
-<h1 id='transactions'>Transactions</h1><h2 id='create-transaction'>Create Transaction</h2>
+<h1 id='transactions-api'>Transactions API</h1><h2 id='create-transaction'>Create Transaction</h2>
 <blockquote>
 <p>Here is an example of a /transactions POST request with the payload completely encrypted:</p>
 </blockquote>
