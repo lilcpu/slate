@@ -234,7 +234,7 @@
             <a href="#building-user-experience" class="toc-h1 toc-link" data-title="Building User Experience">Building User Experience</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#displaying-recurring-payments-cancellation-buttons-and-recommendations" class="toc-h2 toc-link" data-title="Displaying Recurring Payments, Cancellation Buttons, and Recommendations">Displaying Recurring Payments, Cancellation Buttons, and Recommendations</a>
+                    <a href="#displaying-current-subscriptions-cancellation-buttons-and-recommendations" class="toc-h2 toc-link" data-title="Displaying Current Subscriptions, Cancellation Buttons, and Recommendations">Displaying Current Subscriptions, Cancellation Buttons, and Recommendations</a>
                   </li>
                   <li>
                     <a href="#displaying-the-cancellation-modal" class="toc-h2 toc-link" data-title="Displaying the Cancellation Modal">Displaying the Cancellation Modal</a>
@@ -248,13 +248,13 @@
             <a href="#banks" class="toc-h1 toc-link" data-title="Banks">Banks</a>
           </li>
           <li>
-            <a href="#recurring-payments" class="toc-h1 toc-link" data-title="Recurring Payments">Recurring Payments</a>
+            <a href="#current-subscriptions" class="toc-h1 toc-link" data-title="Current Subscriptions">Current Subscriptions</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-recurring-payments-from-a-transaction-history" class="toc-h2 toc-link" data-title="Get All Recurring Payments from a Transaction History">Get All Recurring Payments from a Transaction History</a>
+                    <a href="#get-all-current-subscriptions-from-a-transaction-history" class="toc-h2 toc-link" data-title="Get All Current Subscriptions from a Transaction History">Get All Current Subscriptions from a Transaction History</a>
                   </li>
                   <li>
-                    <a href="#get-new-recurring-payments-from-a-transaction-history-of-an-existing-user" class="toc-h2 toc-link" data-title="Get New Recurring Payments from a Transaction History of an Existing User">Get New Recurring Payments from a Transaction History of an Existing User</a>
+                    <a href="#get-new-subscriptions-from-a-transaction-history-of-an-existing-user" class="toc-h2 toc-link" data-title="Get New Subscriptions from a Transaction History of an Existing User">Get New Subscriptions from a Transaction History of an Existing User</a>
                   </li>
               </ul>
           </li>
@@ -386,11 +386,11 @@ You must replace <code>token</code> with your personal API key.
 </tbody></table>
 <h1 id='building-user-experience'>Building User Experience</h1>
 <p>You will build a consumer-facing user experience directly into your web or mobile application. Below are a few suggestions and examples of how you might build your front-end components and the flows that connect them, but ultimately the choice is yours as for how to best present data and functionality to users.</p>
-<h2 id='displaying-recurring-payments-cancellation-buttons-and-recommendations'>Displaying Recurring Payments, Cancellation Buttons, and Recommendations</h2>
-<p>Display the results of a call to the <a href="#recurring-payments">Recurring Payments API</a> in a list. If you&#39;re using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you&#39;re using the <a href="#recommendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user&#39;s current recurring payments.</p>
+<h2 id='displaying-current-subscriptions-cancellation-buttons-and-recommendations'>Displaying Current Subscriptions, Cancellation Buttons, and Recommendations</h2>
+<p>Display the results of a call to the <a href="#recurring-payments">Current Subscriptions API</a> in a list. If you&#39;re using the <a href="#cancellations">Cancellations API</a>, add a one-way switch or cancel button to each list element. If you&#39;re using the <a href="#recommendations">Recommendations API</a>, display the recommendations returned from your call in a module below the user&#39;s current subscriptions.</p>
 
-<p><img src="https://i.imgur.com/JPLaSZg.png" title="Displaying Recurring Payments and Recommendations Modules" alt="alt text" />
-<img src="https://i.imgur.com/n8szahx.png" title="Displaying Recurring Payments and Recommendations Modules" alt="alt text" /></p>
+<p><img src="https://i.imgur.com/JPLaSZg.png" title="Displaying Current Subscriptions and Recommendations Modules" alt="alt text" />
+<img src="https://i.imgur.com/n8szahx.png" title="Displaying Current Subscriptions and Recommendations Modules" alt="alt text" /></p>
 <h2 id='displaying-the-cancellation-modal'>Displaying the Cancellation Modal</h2>
 <p>Upon clicking or tapping a cancellation button, render a popup modal prompting the user for their email associated with the given service. The modal should appear over the list of recurring services.</p>
 
@@ -400,12 +400,12 @@ You must replace <code>token</code> with your personal API key.
 
 <p><img src="https://i.imgur.com/n8FUqnI.png" title="Pie chart breakdown of a user's monthly spend" alt="alt text" /></p>
 <h1 id='banks'>Banks</h1>
-<p>Lifespan offers two APIs that enable cardholders to view and cancel recurring payments.</p>
+<p>Lifespan offers two APIs that enable cardholders to view and cancel current subscriptions.</p>
 
-<p>The <a href='#recurring-payments'>Recurring Payments API</a> allows developers to find a user&#39;s recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
+<p>The <a href='#recurring-payments'>Current Subscriptions API</a> allows developers to find a user&#39;s recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
 
-<p>The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Recurring Payments API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
-<h1 id='recurring-payments'>Recurring Payments</h1><h2 id='get-all-recurring-payments-from-a-transaction-history'>Get All Recurring Payments from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+<p>The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Current Subscriptions API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
+<h1 id='current-subscriptions'>Current Subscriptions</h1><h2 id='get-all-current-subscriptions-from-a-transaction-history'>Get All Current Subscriptions from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "transactions":[ 
       {
         "amount":12.99,
@@ -456,12 +456,12 @@ You must replace <code>token</code> with your personal API key.
 </tr>
 </tbody></table>
 
-<p><img src="https://i.imgur.com/JPLaSZg.png" title="Displaying Recurring Payments and Recommendations Modules" alt="alt text" /></p>
+<p><img src="https://i.imgur.com/JPLaSZg.png" title="Displaying Current Subscriptions and Recommendations Modules" alt="alt text" /></p>
 
 <aside class="success">
 Don't forget your authentication key
 </aside>
-<h2 id='get-new-recurring-payments-from-a-transaction-history-of-an-existing-user'>Get New Recurring Payments from a Transaction History of an Existing User</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
+<h2 id='get-new-subscriptions-from-a-transaction-history-of-an-existing-user'>Get New Subscriptions from a Transaction History of an Existing User</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "requestId": 1234,
     "transactions":[ 
       {
@@ -496,7 +496,7 @@ Don't forget your authentication key
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint returns a list of all <em>new</em> recurring payments found in a <em>new</em> transaction history for a user who has already been processed in the Recurring Payments API. You should submit new transaction data to this endpoint periodically (preferably monthly) in order to stay up to date with your user&#39;s new subscription enrollments.</p>
+<p>This endpoint returns a list of all <em>new</em> recurring payments found in a <em>new</em> transaction history for a user who has already been processed in the Current Subscriptions API. You should submit new transaction data to this endpoint periodically (preferably monthly) in order to stay up to date with your user&#39;s new subscription enrollments.</p>
 
 <p>Each result will include the merchant <span style="color:#cd3d64;"><code>name</code></span> and the <span style="color:#cd3d64;"><code>price</code></span> of the service. Use negative <span style="color:#cd3d64;"><code>amount</code></span> values for account credits and positive values for charges. The <span style="color:#cd3d64;"><code>price</code></span> field of the returned services is always in cents.</p>
 <h3 id='endpoint'>Endpoint</h3>
@@ -618,7 +618,7 @@ Don't forget your authentication key
 Don't forget your authentication key
 </aside>
 <h1 id='commerce'>Commerce</h1>
-<p>Giving cardholders the ability to track and cancel recurring payments not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy <a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">continues to grow,</a> use our APIs to actively drive increasing and reliable interchange revenue.</p>
+<p>Giving cardholders the ability to track and cancel subscriptions not only enhances your product experience, it also lays the foundation for monetization. It unlocks an opportunity to recommend new services based on data, with your card automatically going on file upon each conversion. As the subscription economy <a href="https://www.mckinsey.com/industries/high-tech/our-insights/thinking-inside-the-subscription-box-new-research-on-ecommerce-consumers" target="_blank">continues to grow,</a> use our APIs to actively drive increasing and reliable interchange revenue.</p>
 <h1 id='recommendations'>Recommendations</h1><h2 id='get-recommended-merchants'>Get Recommended Merchants</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/recommendations
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
@@ -734,7 +734,7 @@ Don't forget your authentication key
 </aside>
 <h1 id='transactions'>Transactions</h1><h2 id='create-transaction'>Create Transaction</h2>
 <blockquote>
-<p>Here is an example of a proper /transactions request with the payload completely encrypted:</p>
+<p>Here is an example of a /transactions POST request with the payload completely encrypted:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/transactions
     -H <span class="s2">"Authorization: {token}"</span>
