@@ -408,22 +408,24 @@ You must replace <code>token</code> with your personal API key.
 <h1 id='banks'>Banks</h1>
 <p>Lifespan offers two APIs that enable cardholders to view and cancel current subscriptions.</p>
 
-<p>The <a href='#current-subscriptions-api'>Current Subscriptions API</a> enables your bank to present a user&#39;s ongoing recurring payments, given transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
+<p><a href='#current-subscriptions-api'>Current Subscriptions API</a> enables your users to view their recurring payments. Given transaction history, it returns a list of all found recurring payments and their prices.</p>
 
-<p>The <a href='#cancellations-api'>Cancellation API</a> can be leveraged in tandem with the results of the Current Subscriptions API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
+<p><a href='#cancellations-api'>Cancellation API</a> can be leveraged in tandem with the results of the Current Subscriptions API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
 
-<p>The <a href='#recommendations-api'>Recommendations API</a> cannot be used without Transactions API.</p>
+<p><a href='#recommendations-api'>Recommendations API</a> provides a list of subscription merchants for the user to transact with, based on their current subscriptions and optionally: age, gender, and zip code. This API cannot be used without the Transactions API.</p>
+
+<p><a href='#transactions-api'>Transactions API</a> enables your users to frictionlessly start new services presented by the Recommendations API. This API cannot be used without the Recommendations API.</p>
 <h1 id='integration-guide'>Integration Guide</h1>
 <p>The Current Subscriptions API and Cancellation API do not require any integrations with Lifespan as they power independent tasks that do not need a user identifier to function. However, the Recommendations API + Transactions API bundle does, and here are the steps:</p>
 
 <ol>
 <li><p>Connect with our Bank Support team at <a href='mailto:banks@lifespan.co'>banks@lifespan.co</a> to recieve a bankID. You will be sending this identifier to Lifespan servers anytime you use the Transactions API.</p></li>
-<li><p>Present a module in your user interface through which a user can opt-in to the subscription service recommendations and transactions experience powered by Lifespan. Once a user opts-in and agrees to the Lifespan Terms &amp; Conditions, send a POST request to /users either with your own UUID for the user or requesting a UUID from Lifespan.</p></li>
-<li><p>Use the Recommendations API to create the module consisting of merchants via a POST request to /recommendations. Each merchant JSON object includes a merchant ID.</p></li>
-<li><p>When the user selects a particular merchant, send a GET request to /merchants/:id with the ID from Step 3. This will return the merchant&#39;s plan(s). Render a &#39;select&#39; button for each, or a &#39;next&#39; button if there is only one plan.</p></li>
+<li><p>Present a module in your user interface through which a user can opt-in to the subscription service recommendations and transactions experience powered by Lifespan. Once a user opts-in and agrees to the Lifespan Terms &amp; Conditions, send a POST request to <code>/users</code> either with your own UUID for the user or requesting a UUID from Lifespan.</p></li>
+<li><p>Use the Recommendations API to create the module consisting of merchants via a POST request to <code>/recommendations</code>. Each merchant JSON object includes a merchant ID.</p></li>
+<li><p>When the user selects a particular merchant, send a GET request to <code>/merchants/:id</code> with the ID from Step 3. This will return the merchant&#39;s plan(s). Render a &#39;select&#39; button for each, or a &#39;next&#39; button if there is only one plan.</p></li>
 <li><p>When the user selects a plan, show a screen in which the user can select a card they would like to place on file.</p></li>
 <li><p>Once the card is selected, display a confirmation screen that includes a link to the merchant&#39;s Terms &amp; Conditions. This URL is provided in the return object in Step 4. Render &#39;accept&#39; and &#39;decline&#39; buttons.</p></li>
-<li><p>All required user input is now complete, and if the user has accepted the merchant&#39;s T&amp;C, you can now use the Transactions API to register an account with the merchant on behalf of the user. Send a POST request to /transactions with all the required information.</p></li>
+<li><p>All required user input is now complete, and if the user has accepted the merchant&#39;s T&amp;C, you can now use the Transactions API to register an account with the merchant on behalf of the user. Send a POST request to <code>/transactions</code> with all the required information.</p></li>
 </ol>
 <h1 id='current-subscriptions-api'>Current Subscriptions API</h1><h2 id='get-all-current-subscriptions-from-a-transaction-history'>Get All Current Subscriptions from a Transaction History</h2><pre class="highlight shell tab-shell"><code>curl -d <span class="s1">'{
     "transactions":[ 
