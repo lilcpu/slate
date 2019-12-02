@@ -766,6 +766,18 @@ Don't forget your authentication key
 <p>This endpoint takes in an optional <span style="color:#cd3d64;"><code>userUuid</code></span> and registers a new user in the Lifespan system. If no UUID is provided, Lifespan will create and return a new UUID for the user. The response object will always look the same, either confirming the provided UUID or returning a newly created UUID. The returned UUID is to be used for all Transactions API requests involving this user.</p>
 <h3 id='endpoint-6'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/users</code></p>
+<h3 id='payload-6'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userUuid <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>User&#39;s existing UUID in your system <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Optional</span></td>
+</tr>
+</tbody></table>
 
 <aside class="success">
 Don't forget your authentication key
@@ -822,7 +834,7 @@ Don't forget your authentication key
 <p>This endpoint takes in an encrypted payload containing the IDs of all entities involved with the transaction (bank, user, merchant, plan), as well as the user&#39;s PII data (first name, last name, email) and card to be used for payment. All of this information is to be encrypted using the AES key, which itself is to be encrypted using the recipient&#39;s RSA public key.</p>
 <h3 id='endpoint-7'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/transactions</code></p>
-<h3 id='payload-6'>Payload</h3>
+<h3 id='payload-7'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -903,7 +915,7 @@ Don't forget your authentication key
 <p><code>POST https://api.lifespan.co/merchants</code></p>
 
 <p><code>PUT https://api.lifespan.co/merchants</code></p>
-<h3 id='payload-7'>Payload</h3>
+<h3 id='payload-8'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
