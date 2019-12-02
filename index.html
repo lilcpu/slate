@@ -408,7 +408,7 @@ You must replace <code>token</code> with your personal API key.
 <h1 id='banks'>Banks</h1>
 <p>Lifespan offers two APIs that enable cardholders to view and cancel current subscriptions.</p>
 
-<p>The <a href='#current-subscriptions-api'>Current Subscriptions API</a> allows developers to find a user&#39;s recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
+<p>The <a href='#current-subscriptions-api'>Current Subscriptions API</a> enables your bank to present a user&#39;s ongoing recurring payments, given transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
 
 <p>The <a href='#cancellations-api'>Cancellation API</a> can be leveraged in tandem with the results of the Current Subscriptions API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
 
@@ -417,7 +417,7 @@ You must replace <code>token</code> with your personal API key.
 <p>The Current Subscriptions API and Cancellation API do not require any integrations with Lifespan as they power independent tasks that do not need a user identifier to function. However, the Recommendations API + Transactions API bundle does, and here are the steps:</p>
 
 <ol>
-<li><p>Connect with our Bank Support team at banks@lifespan.co to recieve a bankID. You will be sending this identifier to Lifespan servers each time you create a new transaction.</p></li>
+<li><p>Connect with our Bank Support team at <a href='mailto:banks@lifespan.co'>banks@lifespan.co</a> to recieve a bankID. You will be sending this identifier to Lifespan servers anytime you use the Transactions API.</p></li>
 <li><p>Present a module in your user interface through which a user can opt-in to the subscription service recommendations and transactions experience powered by Lifespan. Once a user opts-in and agrees to the Lifespan Terms &amp; Conditions, send a POST request to /users either with your own UUID for the user or requesting a UUID from Lifespan.</p></li>
 <li><p>Use the Recommendations API to create the module consisting of merchants via a POST request to /recommendations. Each merchant JSON object includes a merchant ID.</p></li>
 <li><p>When the user selects a particular merchant, send a GET request to /merchants/:id with the ID from Step 3. This will return the merchant&#39;s plan(s). Render a &#39;select&#39; button for each, or a &#39;next&#39; button if there is only one plan.</p></li>
@@ -754,6 +754,7 @@ Don't forget your authentication key
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
     -d <span class="s1">'{
+         "bankId": "391"
          "userUuid": "81c310c8-6d96-43e0-a9ad-1bc0bab01b32"
        }'</span>
 </code></pre>
@@ -764,7 +765,7 @@ Don't forget your authentication key
   </span><span class="s2">"userUuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81c310c8-6d96-43e0-a9ad-1bc0bab01b32"</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint takes in an optional <span style="color:#cd3d64;"><code>userUuid</code></span> and registers a new user in the Lifespan system. If no UUID is provided, Lifespan will create and return a new UUID for the user. The response object will always look the same, either confirming the provided UUID or returning a newly created UUID. The returned UUID is to be used for all Transactions API requests involving this user.</p>
+<p>This endpoint takes in your bankId and an optional <span style="color:#cd3d64;"><code>userUuid</code></span>, and registers a new user in the Lifespan system. If no UUID is provided, Lifespan will create and return a new UUID for the user. The response object will always look the same, either confirming the provided UUID or returning a newly created UUID. The returned UUID is to be used for all Transactions API requests involving this user.</p>
 <h3 id='endpoint-6'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/users</code></p>
 <h3 id='payload-6'>Payload</h3>
@@ -774,6 +775,10 @@ Don't forget your authentication key
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>bankId <span style="color:#8792a2; font-size:12px;">string</span></td>
+<td>The ID assigned to your institution by Lifespan. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
 <tr>
 <td>userUuid <span style="color:#8792a2; font-size:12px;">string</span></td>
 <td>User&#39;s existing UUID in your system. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Optional</span></td>
