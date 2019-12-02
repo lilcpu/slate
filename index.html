@@ -765,7 +765,7 @@ Don't forget your authentication key
 </span></code></pre>
 <p>This endpoint takes in an optional <span style="color:#cd3d64;"><code>userUuid</code></span> and registers a new user in the Lifespan system. If no UUID is provided, Lifespan will create and return a new UUID for the user. The response object will always look the same, either confirming the provided UUID or returning a newly created UUID. The returned UUID is to be used for all Transactions API requests involving this user.</p>
 <h3 id='endpoint-6'>Endpoint</h3>
-<p><code>GET https://api.lifespan.co/users</code></p>
+<p><code>POST https://api.lifespan.co/users</code></p>
 
 <aside class="success">
 Don't forget your authentication key
