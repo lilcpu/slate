@@ -666,6 +666,7 @@ Don't forget your authentication key
          </span><span class="s2">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://logo.clearbit.com/wsj.com"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Read premium business journalism"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$1 for first 2 months"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"terms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.wsj.com/policy/subscriber-agreement"</span><span class="w">
      </span><span class="p">},</span><span class="w">
      </span><span class="p">{</span><span class="w">
          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birchbox"</span><span class="p">,</span><span class="w">
@@ -673,6 +674,7 @@ Don't forget your authentication key
          </span><span class="s2">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://logo.clearbit.com/birchbox.com"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receive 5 top beauty samples monthly"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$5 off first month"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"terms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.birchbox.com/about/terms-conditions"</span><span class="p">,</span><span class="w">
      </span><span class="p">},</span><span class="w">
      </span><span class="p">{</span><span class="w">
          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rent the Runway"</span><span class="p">,</span><span class="w">
@@ -680,8 +682,9 @@ Don't forget your authentication key
          </span><span class="s2">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://logo.clearbit.com/renttherunway.com"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rent unlimited designer clothing"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"offer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50% off first month"</span><span class="p">,</span><span class="w">
-     </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+         </span><span class="s2">"terms"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.renttherunway.com/pages/termsofservice
+     }
+}
 </span></code></pre>
 <p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the merchant&#39;s name, logo URL, description, and offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
 <h3 id='endpoint-4'>Endpoint</h3>
