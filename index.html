@@ -411,10 +411,11 @@ You must replace <code>token</code> with your personal API key.
 
 <p>The <a href='#recommendations'>Recommendations API</a> cannot be used without Transactions API.</p>
 <h1 id='integration-guide'>Integration Guide</h1>
-<p>The Current Subscriptions API, Cancellation API, and Recommendations API do not require any integrations with Lifespan. However, the Transactions API does, and here are the steps:</p>
+<p>The Current Subscriptions API and Cancellation API do not require any integrations with Lifespan. However, the Recommendations API + Transactions API does, and here are the steps:</p>
 
 <ol>
 <li><p>Connect with our Bank Support team at banks@lifespan.co to recieve a bankID. You will be sending this identifier to Lifespan servers each time you create a new transaction.</p></li>
+<li><p>Present a module in your user interface through which a user can opt-in to the subscription service recommendations and transactions experience powered by Lifespan. Once a user opts-in and agrees to the Lifespan Terms &amp; Conditions, send a POST request to /users either with your own UUID for the user or requesting a UUID from Lifespan.</p></li>
 <li><p>Use the Recommendations API to create the module consisting of merchants via a POST request to /recommendations. Each merchant JSON object includes a merchant ID.</p></li>
 <li><p>When the user selects a particular merchant, send a GET request to /merchants/:id with the ID from Step 2. This will return the merchant&#39;s plan(s). Render a select button for each, or a next button if there is only one plan.</p></li>
 <li><p>When the user selects a plan, show a screen in which the user can select a card they would like to place on file.</p></li>
