@@ -287,6 +287,9 @@
             <a href="#transactions-api" class="toc-h1 toc-link" data-title="Transactions API">Transactions API</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#create-user" class="toc-h2 toc-link" data-title="Create User">Create User</a>
+                  </li>
+                  <li>
                     <a href="#create-transaction" class="toc-h2 toc-link" data-title="Create Transaction">Create Transaction</a>
                   </li>
               </ul>
@@ -746,7 +749,28 @@ Don't forget your authentication key
 <aside class="success">
 Don't forget your authentication key
 </aside>
-<h1 id='transactions-api'>Transactions API</h1><h2 id='create-transaction'>Create Transaction</h2>
+<h1 id='transactions-api'>Transactions API</h1><h2 id='create-user'>Create User</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/users
+    -H <span class="s2">"Authorization: {token}"</span>
+    -H <span class="s2">"Content-Type: application/json"</span>
+    -d <span class="s1">'{
+         "userUuid": "81c310c8-6d96-43e0-a9ad-1bc0bab01b32"
+       }'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"userUuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"81c310c8-6d96-43e0-a9ad-1bc0bab01b32"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint takes in an optional <span style="color:#cd3d64;"><code>userUuid</code></span> and registers a new user in the Lifespan system, with the given UUID to be used for all Transactions API requests involving this user. If no UUID is provided, Lifespan will create and return a new UUID for the user. The response object will always look the same, either confirming the provided UUID or returning a newly created UUID.</p>
+<h3 id='endpoint-6'>Endpoint</h3>
+<p><code>GET https://api.lifespan.co/users</code></p>
+
+<aside class="success">
+Don't forget your authentication key
+</aside>
+<h2 id='create-transaction'>Create Transaction</h2>
 <blockquote>
 <p>Here is an example of a /transactions POST request with the payload completely encrypted:</p>
 </blockquote>
@@ -796,7 +820,7 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in an encrypted payload containing the IDs of all entities involved with the transaction (bank, user, merchant, plan), as well as the user&#39;s PII data (first name, last name, email) and card to be used for payment. All of this information is to be encrypted using the AES key, which itself is to be encrypted using the recipient&#39;s RSA public key.</p>
-<h3 id='endpoint-6'>Endpoint</h3>
+<h3 id='endpoint-7'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/transactions</code></p>
 <h3 id='payload-6'>Payload</h3>
 <table><thead>
