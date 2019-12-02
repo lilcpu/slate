@@ -408,11 +408,11 @@ You must replace <code>token</code> with your personal API key.
 <h1 id='banks'>Banks</h1>
 <p>Lifespan offers two APIs that enable cardholders to view and cancel current subscriptions.</p>
 
-<p>The <a href='#recurring-payments'>Current Subscriptions API</a> allows developers to find a user&#39;s recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
+<p>The <a href='#current-subscriptions-api'>Current Subscriptions API</a> allows developers to find a user&#39;s recurring transactions from a full transaction history. It returns a list of all found recurring payments and their prices. This information can be used to provide a breakdown of the user&#39;s monthly recurring spend.</p>
 
-<p>The <a href='#cancellations'>Cancellation API</a> can be leveraged in tandem with the results of the Current Subscriptions API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
+<p>The <a href='#cancellations-api'>Cancellation API</a> can be leveraged in tandem with the results of the Current Subscriptions API to enable users to cancel any recurring service from within your application, as opposed to experiencing various merchants&#39; potentially convoluted cancellation processes. Lifespan will contact the merchant to initiate the cancelation and return an ID that can be used to track status. Your user will be updated via email.</p>
 
-<p>The <a href='#recommendations'>Recommendations API</a> cannot be used without Transactions API.</p>
+<p>The <a href='#recommendations-api'>Recommendations API</a> cannot be used without Transactions API.</p>
 <h1 id='integration-guide'>Integration Guide</h1>
 <p>The Current Subscriptions API and Cancellation API do not require any integrations with Lifespan as they power independent tasks that do not need a user identifier to function. However, the Recommendations API + Transactions API bundle does, and here are the steps:</p>
 
