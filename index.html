@@ -264,6 +264,9 @@
                   <li>
                     <a href="#get-cancellation-information-for-a-subscription" class="toc-h2 toc-link" data-title="Get Cancellation Information For a Subscription">Get Cancellation Information For a Subscription</a>
                   </li>
+                  <li>
+                    <a href="#coming-soon-get-the-details-of-a-specific-cancellation-request" class="toc-h2 toc-link" data-title="Coming Soon: Get the Details of a Specific Cancellation Request">Coming Soon: Get the Details of a Specific Cancellation Request</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -603,44 +606,42 @@ Don't forget your authentication key
 </aside>
 
 <p><img src="https://i.imgur.com/KdtluxJ.png" title="Cancellations" alt="alt text" /></p>
-
-<!-- ## Get the Details of a Specific Cancellation Request
-
-```shell
-curl "https://api.lifespan.co/cancellations/1234"
-  -H "Authorization: {token}"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 1234,
-  "merchantName": "Spotify",
-  "merchantState":"NY", 
-  "merchantCity":"New York",
-  "merchantZip":"90028",
-  "status": "completed",
-  "type": "phone",
-  "contactDetails": "1234567890"
-}
-```
-
-This endpoint returns the details of a given cancellation id.
-
-### Endpoint
-
-`GET https://api.lifespan.co/cancellations/<id>`
-
-### Payload
-
-Parameter | Description
---------- | -----------
-id <span style="color:#8792a2; font-size:12px;">integer</span> | The ID of the cancellation. This is provided in the response to a POST request to <span style="color:#cd3d64;">`/cancellations`</span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span>
+<h2 id='coming-soon-get-the-details-of-a-specific-cancellation-request'>Coming Soon: Get the Details of a Specific Cancellation Request</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.lifespan.co/cancellations/1234"</span>
+  -H <span class="s2">"Authorization: {token}"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantState"</span><span class="p">:</span><span class="s2">"NY"</span><span class="p">,</span><span class="w"> 
+  </span><span class="s2">"merchantCity"</span><span class="p">:</span><span class="s2">"New York"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"merchantZip"</span><span class="p">:</span><span class="s2">"90028"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contactDetails"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns the details of a given cancellation id.</p>
+<h3 id='endpoint-3'>Endpoint</h3>
+<p><code>GET https://api.lifespan.co/cancellations/&lt;id&gt;</code></p>
+<h3 id='payload-4'>Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id <span style="color:#8792a2; font-size:12px;">integer</span></td>
+<td>The ID of the cancellation. This is provided in the response to a POST request to <span style="color:#cd3d64;"><code>/cancellations</code></span>. <span style="color:#e56f4a; font-size:10px; letter-spacing: .12px; text-transform: uppercase; font-weight: 600;">Required</span></td>
+</tr>
+</tbody></table>
 
 <aside class="success">
 Don't forget your authentication key
-</aside> -->
+</aside>
 <h1 id='recommendations-api'>Recommendations API</h1><h2 id='get-recommended-merchants'>Get Recommended Merchants</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://api.lifespan.co/recommendations
     -H <span class="s2">"Authorization: {token}"</span>
     -H <span class="s2">"Content-Type: application/json"</span>
@@ -689,9 +690,9 @@ Don't forget your authentication key
 }
 </span></code></pre>
 <p>This endpoint takes in a user&#39;s current <span style="color:#cd3d64;"><code>subscriptions</code></span>, <span style="color:#cd3d64;"><code>gender</code></span>, <span style="color:#cd3d64;"><code>age</code></span>, and <span style="color:#cd3d64;"><code>zip</code></span> code. The response is an array of objects consisting of the merchant&#39;s name, logo URL, description, and offer. The objects are ranked in order of user conversion probability as scored by our recommendations algorithm, so we encourage you to display the results in the order in which you receive them.</p>
-<h3 id='endpoint-3'>Endpoint</h3>
+<h3 id='endpoint-4'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/recommendations</code></p>
-<h3 id='payload-4'>Payload</h3>
+<h3 id='payload-5'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -751,7 +752,7 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in a merchant&#39;s <span style="color:#cd3d64;"><code>id</code></span> in the URL. No other arguments are necessary. The response consists of an array of objects representing a plan of the merchant. Each plan object contains a name, id, description, and price. The merchant&#39;s ID for the request is provided in the response from the /merchants endpoint.</p>
-<h3 id='endpoint-4'>Endpoint</h3>
+<h3 id='endpoint-5'>Endpoint</h3>
 <p><code>GET https://api.lifespan.co/merchants/:id</code></p>
 
 <aside class="success">
@@ -773,9 +774,9 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in your <span style="color:#cd3d64;"><code>bankId</code></span> and an optional <span style="color:#cd3d64;"><code>userUuid</code></span>, and registers a new user in the Lifespan system. If no UUID is provided, Lifespan will create and return a new UUID for the user. The response object will always look the same, either confirming the provided UUID or returning a newly created UUID. The returned UUID is to be used for all Transactions API requests involving this user.</p>
-<h3 id='endpoint-5'>Endpoint</h3>
+<h3 id='endpoint-6'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/users</code></p>
-<h3 id='payload-5'>Payload</h3>
+<h3 id='payload-6'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -845,9 +846,9 @@ Don't forget your authentication key
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint takes in an encrypted payload containing the IDs of all entities involved with the transaction (bank, user, merchant, plan), as well as the user&#39;s PII data (first name, last name, email) and card to be used for payment. All of this information is to be encrypted using the AES key, which itself is to be encrypted using the recipient&#39;s RSA public key.</p>
-<h3 id='endpoint-6'>Endpoint</h3>
+<h3 id='endpoint-7'>Endpoint</h3>
 <p><code>POST https://api.lifespan.co/transactions</code></p>
-<h3 id='payload-6'>Payload</h3>
+<h3 id='payload-7'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -928,7 +929,7 @@ Don't forget your authentication key
 <p><code>POST https://api.lifespan.co/merchants</code></p>
 
 <p><code>PUT https://api.lifespan.co/merchants</code></p>
-<h3 id='payload-7'>Payload</h3>
+<h3 id='payload-8'>Payload</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
